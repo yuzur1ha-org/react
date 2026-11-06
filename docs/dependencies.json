@@ -1,0 +1,338 @@
+[
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "@mdx-js/mdx",
+    "version": "3.1.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "@types/estree",
+    "version": "1.0.9",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "@types/hast",
+    "version": "3.0.5",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "@types/mdast",
+    "version": "4.0.4",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "@types/unist",
+    "version": "3.0.3",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "acorn",
+    "version": "8.19.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "hast-util-to-string",
+    "version": "3.0.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "mdast-util-gfm-table",
+    "version": "2.0.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "mdast-util-mdx-jsx",
+    "version": "3.2.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "mdast-util-to-hast",
+    "version": "13.2.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "micromark-extension-gfm-table",
+    "version": "2.1.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "react",
+    "version": "19.3.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "rehype-raw",
+    "version": "7.0.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "remark-directive",
+    "version": "4.0.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "remark-frontmatter",
+    "version": "5.0.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "remark-parse",
+    "version": "11.0.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "source-map",
+    "version": "0.7.6",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "unified",
+    "version": "11.0.5",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "unist-util-visit",
+    "version": "5.1.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "vfile",
+    "version": "6.0.3",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "vite",
+    "version": "8.3.5",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/markdown",
+    "name": "yaml",
+    "version": "2.9.1",
+    "license": "ISC"
+  },
+  {
+    "consumer": "@yuzur1ha/press",
+    "name": "@react-router/dev",
+    "version": "8.5.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press",
+    "name": "@react-router/node",
+    "version": "8.5.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press",
+    "name": "jiti",
+    "version": "2.7.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press",
+    "name": "mri",
+    "version": "1.2.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press",
+    "name": "react",
+    "version": "19.3.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press",
+    "name": "react-dom",
+    "version": "19.3.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press",
+    "name": "react-router",
+    "version": "8.5.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press",
+    "name": "shiki",
+    "version": "4.6.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press",
+    "name": "vite",
+    "version": "8.3.5",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press-reference",
+    "name": "@emotion/react",
+    "version": "11.14.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press-reference",
+    "name": "lucide-react",
+    "version": "1.61.0",
+    "license": "ISC"
+  },
+  {
+    "consumer": "@yuzur1ha/press-reference",
+    "name": "react",
+    "version": "19.3.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press-reference",
+    "name": "react-dom",
+    "version": "19.3.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press-theme",
+    "name": "@emotion/cache",
+    "version": "11.14.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press-theme",
+    "name": "@emotion/react",
+    "version": "11.14.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press-theme",
+    "name": "lucide-react",
+    "version": "1.61.0",
+    "license": "ISC"
+  },
+  {
+    "consumer": "@yuzur1ha/press-theme",
+    "name": "react",
+    "version": "19.3.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press-theme",
+    "name": "react-dom",
+    "version": "19.3.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/press-theme",
+    "name": "react-router",
+    "version": "8.5.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/token",
+    "name": "@fontsource-variable/instrument-sans",
+    "version": "5.3.0",
+    "license": "OFL-1.1"
+  },
+  {
+    "consumer": "@yuzur1ha/token",
+    "name": "@fontsource-variable/jetbrains-mono",
+    "version": "5.3.0",
+    "license": "OFL-1.1"
+  },
+  {
+    "consumer": "@yuzur1ha/ui",
+    "name": "@emotion/react",
+    "version": "11.14.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/ui",
+    "name": "@radix-ui/react-accordion",
+    "version": "1.3.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/ui",
+    "name": "@radix-ui/react-collapsible",
+    "version": "1.2.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/ui",
+    "name": "@radix-ui/react-dialog",
+    "version": "1.3.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/ui",
+    "name": "@radix-ui/react-form",
+    "version": "0.3.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/ui",
+    "name": "@radix-ui/react-popover",
+    "version": "1.3.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/ui",
+    "name": "@radix-ui/react-scroll-area",
+    "version": "1.4.0",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/ui",
+    "name": "@radix-ui/react-select",
+    "version": "2.4.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/ui",
+    "name": "@radix-ui/react-toast",
+    "version": "1.3.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/ui",
+    "name": "@radix-ui/react-tooltip",
+    "version": "1.4.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/ui",
+    "name": "lucide-react",
+    "version": "1.61.0",
+    "license": "ISC"
+  },
+  {
+    "consumer": "@yuzur1ha/ui",
+    "name": "react",
+    "version": "19.3.1",
+    "license": "MIT"
+  },
+  {
+    "consumer": "@yuzur1ha/ui",
+    "name": "react-dom",
+    "version": "19.3.1",
+    "license": "MIT"
+  }
+]

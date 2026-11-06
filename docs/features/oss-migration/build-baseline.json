@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-04",
+  "format": "Uncompressed ESM library output; sourcemaps excluded",
+  "packages": {
+    "token": {
+      "javascriptBytes": 12195,
+      "cssBytes": 10136
+    },
+    "ui": {
+      "javascriptBytes": 114704,
+      "cssBytes": 0
+    },
+    "markdown": {
+      "javascriptBytes": 14771,
+      "cssBytes": 0
+    },
+    "press": {
+      "javascriptBytes": 69191,
+      "cssBytes": 0
+    },
+    "press-theme": {
+      "javascriptBytes": 69124,
+      "cssBytes": 0
+    },
+    "press-reference": {
+      "javascriptBytes": 22321,
+      "cssBytes": 0
+    }
+  },
+  "buttonFixture": {
+    "javascriptBytes": 16012,
+    "renderedModules": 18,
+    "description": "Minified Vite bundle of @yuzur1ha/ui/button; React and Emotion external; no accordion/compiler modules"
+  }
+}

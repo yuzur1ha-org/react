@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-04",
+  "node": "v26.5.1",
+  "comparisonNote": "迁移前字节来自本轮开始时已有产物；本轮增加了 11 个指南页面，输入不同，不能作为等量性能对比。旧构建无可比较的整体耗时记录。",
+  "before": {
+    ".html": 6702030,
+    ".js": 1244760
+  },
+  "after": {
+    "html": {
+      "files": 45,
+      "bytes": 8004745,
+      "gzipBytes": 999539
+    },
+    "javascript": {
+      "files": 121,
+      "bytes": 1693087,
+      "gzipBytes": 418551
+    },
+    "wasmFiles": 0,
+    "clientChunks": 120,
+    "clientModules": 387,
+    "forbiddenModules": [],
+    "packages": {
+      "markdown": {
+        "javascript": {
+          "files": 5,
+          "bytes": 16669,
+          "gzipBytes": 5710
+        },
+        "css": {
+          "files": 0,
+          "bytes": 0,
+          "gzipBytes": 0
+        }
+      },
+      "press": {
+        "javascript": {
+          "files": 10,
+          "bytes": 79615,
+          "gzipBytes": 25300
+        },
+        "css": {
+          "files": 0,
+          "bytes": 0,
+          "gzipBytes": 0
+        }
+      },
+      "press-reference": {
+        "javascript": {
+          "files": 1,
+          "bytes": 13403,
+          "gzipBytes": 3176
+        },
+        "css": {
+          "files": 0,
+          "bytes": 0,
+          "gzipBytes": 0
+        }
+      },
+      "press-theme": {
+        "javascript": {
+          "files": 1,
+          "bytes": 69575,
+          "gzipBytes": 15849
+        },
+        "css": {
+          "files": 0,
+          "bytes": 0,
+          "gzipBytes": 0
+        }
+      },
+      "token": {
+        "javascript": {
+          "files": 3,
+          "bytes": 12955,
+          "gzipBytes": 4206
+        },
+        "css": {
+          "files": 3,
+          "bytes": 10840,
+          "gzipBytes": 2729
+        }
+      },
+      "ui": {
+        "javascript": {
+          "files": 63,
+          "bytes": 119999,
+          "gzipBytes": 44010
+        },
+        "css": {
+          "files": 0,
+          "bytes": 0,
+          "gzipBytes": 0
+        }
+      }
+    }
+  }
+}
