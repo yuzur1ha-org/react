@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "types": ["node", "vite/client"],
+    "jsx": "react-jsx",
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src", "tests", "vitest.config.ts", "vite.config.ts"]
+}
