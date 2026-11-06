@@ -1,0 +1,60 @@
+{
+  "name": "@yuzur1ha/token",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "dist",
+    "fonts.css",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./css": "./dist/tokens.css",
+    "./heroui": "./dist/heroui.css",
+    "./fonts.css": "./fonts.css",
+    "./markdown": {
+      "types": "./dist/markdown/index.d.ts",
+      "import": "./dist/markdown/index.js"
+    },
+    "./markdown.css": "./dist/markdown.css"
+  },
+  "scripts": {
+    "build": "vite build && node ../../scripts/build-declarations.mjs && node scripts/build.mjs",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "pnpm -w test:unit --project=token"
+  },
+  "dependencies": {
+    "@fontsource-variable/instrument-sans": "5.3.0",
+    "@fontsource-variable/jetbrains-mono": "5.3.0"
+  },
+  "license": "MIT",
+  "description": "Design tokens, CSS themes and typography adapters.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soppylzz/yuzur1ha-oss.git",
+    "directory": "packages/token"
+  },
+  "homepage": "https://github.com/soppylzz/yuzur1ha-oss#readme",
+  "bugs": {
+    "url": "https://github.com/soppylzz/yuzur1ha-oss/issues"
+  },
+  "keywords": [
+    "yuzur1ha",
+    "typescript",
+    "esm"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": "^24.0.0 || ^26.0.0"
+  }
+}
