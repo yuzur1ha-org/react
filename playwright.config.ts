@@ -60,7 +60,7 @@ export default defineConfig({
   testDir: root,
   outputDir: "test-results/browser",
   fullyParallel: true,
-  workers: 5,
+  workers: process.env.CI ? 2 : 5,
   use: { trace: "retain-on-failure" },
   webServer: names
     .filter(

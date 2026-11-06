@@ -24,7 +24,13 @@ jobs:
       - run: pnpm exec vitest run
       - run: pnpm exec playwright install --with-deps chromium webkit
         if: matrix.node == 24
-      - run: pnpm exec playwright test --project=docs:* --project=docs-content:* --project=docs-polish:* --project=press:ssg
+      - run: pnpm exec playwright test --project=docs:*
+        if: matrix.node == 24
+      - run: pnpm exec playwright test --project=docs-polish:*
+        if: matrix.node == 24
+      - run: pnpm exec playwright test --project=docs-content:*
+        if: matrix.node == 24
+      - run: pnpm exec playwright test --project=press:ssg
         if: matrix.node == 24
       - run: pnpm --filter @yuzur1ha/docs build && pnpm exec playwright test --project=docs-production:* --project=docs-polish-production:*
         if: matrix.node == 24

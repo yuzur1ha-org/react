@@ -111,7 +111,8 @@ export function watchProject(
       try {
         if (!statSync(path).isDirectory()) return
       } catch {
-        return
+        if (![...fingerprints.keys()].some((input) => inside(path, input)))
+          return
       }
     }
     if (!failed && fingerprints.get(path) === fingerprint(path)) return

@@ -22,7 +22,7 @@
     "typecheck:run": "tsc -p tsconfig.json && pnpm -r --if-present typecheck",
     "test": "pnpm test:unit",
     "test:unit": "pnpm check:prepare && vitest run",
-    "test:e2e": "pnpm check:prepare && playwright test --project=docs:* --project=docs-content:* --project=docs-polish:*",
+    "test:e2e": "pnpm check:prepare && playwright test --project=docs:* && playwright test --project=docs-polish:* && playwright test --project=docs-content:*",
     "test:production": "pnpm build && playwright test --project=docs-production:* && playwright test --project=docs-polish-production:*",
     "test:ssg": "pnpm build:packages && playwright test --project=press:ssg",
     "changeset": "changeset",

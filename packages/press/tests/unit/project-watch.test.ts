@@ -42,52 +42,59 @@ it.each(["gif", "avif", "PNG"])(
   },
 )
 
-it("watches additions, deletion, invalid input and recovery without watching generated output", async () => {
-  const root = await fixture()
-  let updates = 0
-  let failures = 0
-  const close = watchProject({ root }, (snapshot, error) => {
-    if (snapshot) updates++
-    if (error) failures++
-  })
-  try {
-    await expect.poll(() => updates).toBe(1)
-    await new Promise((resolve) => setTimeout(resolve, 250))
-    expect(updates).toBe(1)
-    await writeFile(
-      join(root, "content/hello.md"),
-      "---\nid: greeting\ntitle: false\n---\n# Fallback",
-    )
-    await expect.poll(() => failures).toBeGreaterThan(0)
-    await writeFile(
-      join(root, "content/hello.md"),
-      "---\nid: recovered\n---\n# Recovered",
-    )
-    await expect.poll(() => updates).toBe(2)
-    await mkdir(join(root, "content/new"))
-    await writeFile(
-      join(root, "content/new/added.md"),
-      "---\nid: added\n---\n# Added",
-    )
-    await expect
-      .poll(async () =>
-        (
-          await readFile(join(root, ".cache/press/documents.d.ts"), "utf8")
-        ).includes('"added"'),
+it.each(["file", "directory"])(
+  "watches additions, %s deletion, invalid input and recovery without watching generated output",
+  async (removed) => {
+    const root = await fixture()
+    let updates = 0
+    let failures = 0
+    const close = watchProject({ root }, (snapshot, error) => {
+      if (snapshot) updates++
+      if (error) failures++
+    })
+    try {
+      await expect.poll(() => updates).toBe(1)
+      await new Promise((resolve) => setTimeout(resolve, 250))
+      expect(updates).toBe(1)
+      await writeFile(
+        join(root, "content/hello.md"),
+        "---\nid: greeting\ntitle: false\n---\n# Fallback",
       )
-      .toBe(true)
-    await rm(join(root, "content/new/added.md"))
-    await expect
-      .poll(async () =>
-        (
-          await readFile(join(root, ".cache/press/documents.d.ts"), "utf8")
-        ).includes('"added"'),
+      await expect.poll(() => failures).toBeGreaterThan(0)
+      await writeFile(
+        join(root, "content/hello.md"),
+        "---\nid: recovered\n---\n# Recovered",
       )
-      .toBe(false)
-  } finally {
-    await close()
-  }
-}, 10000)
+      await expect.poll(() => updates).toBe(2)
+      await mkdir(join(root, "content/new"))
+      await writeFile(
+        join(root, "content/new/added.md"),
+        "---\nid: added\n---\n# Added",
+      )
+      await expect
+        .poll(async () =>
+          (
+            await readFile(join(root, ".cache/press/documents.d.ts"), "utf8")
+          ).includes('"added"'),
+        )
+        .toBe(true)
+      await rm(
+        join(root, removed === "file" ? "content/new/added.md" : "content/new"),
+        { recursive: removed === "directory" },
+      )
+      await expect
+        .poll(async () =>
+          (
+            await readFile(join(root, ".cache/press/documents.d.ts"), "utf8")
+          ).includes('"added"'),
+        )
+        .toBe(false)
+    } finally {
+      await close()
+    }
+  },
+  10000,
+)
 it("rebuilds imported TS configuration and watches sources outside the project root", async () => {
   const root = await fixture()
   const external = await mkdtemp(
