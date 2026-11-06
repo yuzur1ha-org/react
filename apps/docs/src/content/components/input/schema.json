@@ -1,0 +1,130 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "input",
+  "parts": [
+    {
+      "name": "Input",
+      "typeName": "InputProps",
+      "description": "Unlabelled native input. Use with FormLabel/FormControl or an accessible name. size controls visual dimensions; htmlSize is the native character-width hint.",
+      "props": [
+        {
+          "name": "size",
+          "type": "ComponentSize",
+          "required": false,
+          "description": "Visual size: small, medium or large.",
+          "default": "\"medium\""
+        },
+        {
+          "name": "htmlSize",
+          "type": "number",
+          "required": false,
+          "description": "Native input size attribute, measured as an approximate character width; does not select the visual component size."
+        },
+        {
+          "name": "type",
+          "type": "HTMLInputTypeAttribute",
+          "required": false,
+          "description": "Native input type; the browser defaults to text."
+        },
+        {
+          "name": "value",
+          "type": "string | number | readonly string[]",
+          "required": false,
+          "description": "Current native control value. Pair with onChange for controlled input."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string | number | readonly string[]",
+          "required": false,
+          "description": "Initial value used when the native control is uncontrolled."
+        },
+        {
+          "name": "onChange",
+          "type": "ChangeEventHandler<HTMLInputElement, HTMLInputElement>",
+          "required": false,
+          "description": "Native input change handler. Read value or checked from event.currentTarget."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "required": false,
+          "description": "Requires a non-empty native control value during form validation."
+        },
+        {
+          "name": "readOnly",
+          "type": "boolean",
+          "required": false,
+          "description": "Keeps the current value readable and focusable while preventing editing."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Native form submission field name."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "description": "Text shown when the control has no value."
+        },
+        {
+          "name": "autoComplete",
+          "type": "HTMLInputAutoCompleteAttribute",
+          "required": false,
+          "description": "Native browser autocomplete hint."
+        },
+        {
+          "name": "maxLength",
+          "type": "number",
+          "required": false,
+          "description": "Maximum input length enforced by the browser."
+        },
+        {
+          "name": "aria-label",
+          "type": "string",
+          "required": false,
+          "description": "Accessible name when a visible label does not already name the element."
+        },
+        {
+          "name": "aria-invalid",
+          "type": "boolean | \"true\" | \"false\" | \"grammar\" | \"spelling\"",
+          "required": false,
+          "description": "Marks the native control invalid for assistive technology."
+        },
+        {
+          "name": "aria-describedby",
+          "type": "string",
+          "required": false,
+          "description": "IDs of additional descriptive elements; field components merge these with their hint or error ID."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLInputElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

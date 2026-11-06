@@ -1,0 +1,104 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "scroll-area",
+  "parts": [
+    {
+      "name": "ScrollArea",
+      "typeName": "ScrollAreaProps",
+      "description": "A native scroll viewport with custom overlay rails. Root ref targets the outer container; viewportProps.ref targets the actual scrolling element. Ordinary viewport gestures and keyboard scrolling remain native.",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the keyboard-focusable native viewport."
+        },
+        {
+          "name": "appearance",
+          "type": "\"normal\" | \"contrast\" | \"hidden\"",
+          "required": false,
+          "description": "Rail palette: contrast by default; normal uses a transparent track and border-colored thumb; hidden removes rails while keeping native scrolling and keyboard access.",
+          "default": "\"contrast\""
+        },
+        {
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\" | \"both\"",
+          "required": false,
+          "description": "Axes that are scrollable and receive custom rails.",
+          "default": "\"vertical\""
+        },
+        {
+          "name": "overscrollBehavior",
+          "type": "CSSProperties[\"overscrollBehavior\"]",
+          "required": false,
+          "description": "Native chaining on enabled axes. Disabled axes stay auto. contain/none isolate the enabled axis; viewportProps.style can override it.",
+          "default": "\"auto\""
+        },
+        {
+          "name": "type",
+          "type": "(\"auto\" | \"always\" | \"scroll\" | \"hover\")",
+          "required": false,
+          "description": "Rail visibility: auto for overflow, always, hover, or scroll.",
+          "default": "\"auto\""
+        },
+        {
+          "name": "scrollHideDelay",
+          "type": "number",
+          "required": false,
+          "description": "Radix hide delay in milliseconds for hover/scroll visibility modes.",
+          "default": "600"
+        },
+        {
+          "name": "dir",
+          "type": "(\"ltr\" | \"rtl\")",
+          "required": false,
+          "description": "Text and keyboard direction: ltr or rtl."
+        },
+        {
+          "name": "viewportProps",
+          "type": "Omit<ComponentPropsWithRef<\"div\">, \"children\" | \"dangerouslySetInnerHTML\">",
+          "required": false,
+          "description": "Props/ref/styles for the actual viewport. Its onWheelCapture can cancel Shift compensation over content; rails are outside this element."
+        },
+        {
+          "name": "onWheelCapture",
+          "type": "WheelEventHandler<HTMLDivElement>",
+          "required": false,
+          "description": "Capture wheel input over the viewport and rails. Prevent default here to cancel built-in Shift/rail compensation before it runs."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLDivElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        },
+        {
+          "name": "contentClassName",
+          "type": "string",
+          "required": false,
+          "description": "Class for the scrollable content wrapper inside the viewport."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

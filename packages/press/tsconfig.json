@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["node", "vite/client"],
+    "jsx": "react-jsx",
+    "noUncheckedSideEffectImports": true
+  },
+  "include": [
+    "src",
+    "tests",
+    "vitest.config.ts",
+    "tests/fixtures/project/yupress.config.ts",
+    "vite.config.ts"
+  ]
+}

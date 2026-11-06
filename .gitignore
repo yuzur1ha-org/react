@@ -1,0 +1,27 @@
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.test
+
+# Local configuration and runtime data
+.local/
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.log
+.DS_Store
+
+# Local tool state
+.pnpm-store/
+*.tsbuildinfo
+
+# Generated documentation
+**/.cache/

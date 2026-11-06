@@ -1,0 +1,137 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "toast",
+  "parts": [
+    {
+      "name": "Toast / ToastItem",
+      "typeName": "ToastProps",
+      "description": "A controlled toast; ToastItem is an alias of Toast. Use one ToastProvider per app and remove records in onExitComplete, after setting open=false. Rich and simple variants can share the same viewport.",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true,
+          "description": "Controlled visibility. Set false when a close request is received."
+        },
+        {
+          "name": "onOpenChange",
+          "type": "(open: boolean) => void",
+          "required": true,
+          "description": "Called with false for dismissal. Update open first and retain the record until onExitComplete."
+        },
+        {
+          "name": "onExitComplete",
+          "type": "(() => void)",
+          "required": false,
+          "description": "Called after the closed toast unmounts following its exit animation. Remove its record here, not in onOpenChange."
+        },
+        {
+          "name": "variant",
+          "type": "\"rich\" | \"simple\"",
+          "required": false,
+          "description": "rich supports description/action; simple forbids both and uses an inline icon and close action.",
+          "default": "\"rich\""
+        },
+        {
+          "name": "tone",
+          "type": "ToastTone",
+          "required": true,
+          "description": "Semantic palette and icon: info, success, warning or error."
+        },
+        {
+          "name": "toneLabel",
+          "type": "string",
+          "required": true,
+          "description": "Localized accessible tone label; visible in rich headers and announced in simple toasts."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "description": "Primary toast message."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false,
+          "description": "Additional text for variant=\"rich\" only. Not accepted by the simple variant."
+        },
+        {
+          "name": "action",
+          "type": "{ label: string; onClick: () => void; }",
+          "required": false,
+          "description": "Rich-only action label and callback. The action also dismisses the toast."
+        },
+        {
+          "name": "duration",
+          "type": "ToastDuration",
+          "required": false,
+          "description": "Auto-dismiss delay in milliseconds. Omitted inherits the Provider (5000ms by default); false persists until dismissed.",
+          "default": "Inherits ToastProvider"
+        },
+        {
+          "name": "closeLabel",
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the built-in close action."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "ToastProvider",
+      "typeName": "ToastProviderProps",
+      "description": "Provides timing, swipe handling and one shared viewport. Each toast can override duration. Hover, focus and window blur pause auto-dismiss and resume the remaining time.",
+      "props": [
+        {
+          "name": "duration",
+          "type": "ToastDuration",
+          "required": false,
+          "description": "Default auto-dismiss delay in milliseconds; false makes toasts persistent. Individual toast duration takes precedence.",
+          "default": "5000"
+        },
+        {
+          "name": "viewportLabel",
+          "type": "string",
+          "required": false,
+          "description": "Accessible label of the shared viewport; overrides its Radix default.",
+          "default": "\"Notifications ({hotkey})\""
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "Radix announcement label used with foreground toast announcements.",
+          "default": "\"Notification\""
+        },
+        {
+          "name": "swipeDirection",
+          "type": "(\"left\" | \"right\" | \"up\" | \"down\")",
+          "required": false,
+          "description": "Direction that dismisses an individual toast by swipe.",
+          "default": "\"right\""
+        },
+        {
+          "name": "swipeThreshold",
+          "type": "number",
+          "required": false,
+          "description": "Minimum swipe distance in pixels before dismissal.",
+          "default": "50"
+        },
+        {
+          "name": "announcerContainer",
+          "type": "Element | DocumentFragment",
+          "required": false,
+          "description": "Optional portal destination for the toast live announcer."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Application/toast children sharing this provider and its single viewport."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

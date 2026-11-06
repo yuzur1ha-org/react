@@ -1,0 +1,10 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "@heroui/styles/themes/shared/theme.css" layer(theme);
+@import "@heroui/styles/utilities";
+@import "@heroui/styles/variants";
+@import "@heroui/styles/themes/default" layer(theme);
+@import "@heroui/styles/components/button.css" layer(components);
+@import "@heroui/styles/components/input.css" layer(components);
+@import "@yuzur1ha/token/heroui";

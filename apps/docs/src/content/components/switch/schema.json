@@ -1,0 +1,107 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "switch",
+  "parts": [
+    {
+      "name": "Switch",
+      "typeName": "SwitchProps",
+      "description": "A labelled native checkbox with switch semantics. State icons are decorative. className styles the label, ref points to the input.",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Visible label and accessible name."
+        },
+        {
+          "name": "size",
+          "type": "ComponentSize",
+          "required": false,
+          "description": "Visual size: small, medium or large.",
+          "default": "\"medium\""
+        },
+        {
+          "name": "hideLabel",
+          "type": "boolean",
+          "required": false,
+          "description": "Visually hide the label while keeping the control accessibly named.",
+          "default": "false"
+        },
+        {
+          "name": "checkedIcon",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Decorative icon inside the thumb in the checked state."
+        },
+        {
+          "name": "uncheckedIcon",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Decorative icon inside the thumb in the unchecked state."
+        },
+        {
+          "name": "checked",
+          "type": "boolean",
+          "required": false,
+          "description": "Controlled checked state. Pair with onChange."
+        },
+        {
+          "name": "defaultChecked",
+          "type": "boolean",
+          "required": false,
+          "description": "Initial checked state for an uncontrolled checkbox or radio."
+        },
+        {
+          "name": "onChange",
+          "type": "ChangeEventHandler<HTMLInputElement, HTMLInputElement>",
+          "required": false,
+          "description": "Native input change handler. Read value or checked from event.currentTarget."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "required": false,
+          "description": "Requires a non-empty native control value during form validation."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Native form submission field name."
+        },
+        {
+          "name": "value",
+          "type": "string | number | readonly string[]",
+          "required": false,
+          "description": "Current native control value. Pair with onChange for controlled input."
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "Native control ID. Generated when omitted; the visible label and supporting text use this association."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLInputElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

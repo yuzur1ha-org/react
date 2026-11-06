@@ -1,0 +1,121 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "modal",
+  "parts": [
+    {
+      "name": "Modal",
+      "typeName": "ModalProps",
+      "description": "A modal dialog with required title and description. Focus is managed by Radix; outside pointer interaction does not dismiss it. Escape and close actions do.",
+      "props": [
+        {
+          "name": "trigger",
+          "type": "ReactElement",
+          "required": true,
+          "description": "One ref-capable action element used as the dialog trigger."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "description": "Required visible and accessible dialog title."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": true,
+          "description": "Required visible and accessible dialog description."
+        },
+        {
+          "name": "closeLabel",
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the built-in close action."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "description": "Controlled open state. Pair with onOpenChange."
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "required": false,
+          "description": "Initial open state when open is omitted.",
+          "default": "false"
+        },
+        {
+          "name": "onOpenChange",
+          "type": "((open: boolean) => void)",
+          "required": false,
+          "description": "Called when opening or closing is requested."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "ModalClose",
+      "typeName": "ComponentPropsWithRef<typeof ModalClose>",
+      "description": "Closes the nearest matching overlay. Use asChild with one ref-capable action element, or render the default native button.",
+      "props": [
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "required": false,
+          "description": "Render through one child element instead of the default element. The child must forward its ref and accept the supplied props.",
+          "default": "false"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "onClick",
+          "type": "MouseEventHandler<HTMLButtonElement>",
+          "required": false,
+          "description": "Native activation handler."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control."
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLButtonElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

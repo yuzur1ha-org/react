@@ -1,0 +1,38 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "segmented",
+  "parts": [
+    {
+      "name": "Segmented",
+      "typeName": "SegmentedProps<T>",
+      "description": "A controlled radio group. T extends string and is shared by value, options and onChange. Every option value must be unique.",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Accessible group label, rendered as a visually hidden legend."
+        },
+        {
+          "name": "value",
+          "type": "T",
+          "required": true,
+          "description": "Currently selected option value of type T."
+        },
+        {
+          "name": "onChange",
+          "type": "(value: T) => void",
+          "required": true,
+          "description": "Called with the selected option value of type T."
+        },
+        {
+          "name": "options",
+          "type": "readonly { value: T; label: string }[]",
+          "required": true,
+          "description": "Ordered radio options with unique string values of type T and visible labels."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

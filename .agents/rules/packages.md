@@ -1,0 +1,7 @@
+# Packages rules
+
+Token is framework-independent. UI depends on token. Markdown owns compilation/plugins/Vite transforms, not filesystem discovery or site policy. Press owns content, Node services, CLI, Vite project integration, SSG and unstyled React contracts; it cannot depend on UI/Emotion/default theme. Theme and reference depend on core public exports. Do not introduce cycles or private cross-package imports. Explicit public API allowlists, files allowlists, CSS sideEffects and peer metadata are public contracts. Relative TS source imports omit extensions; build output must be Node-resolvable. Never hand-edit dist or .cache.
+
+Export patterns may target only a validated public-entry directory. UI maintains its ordered public component list in vite.config.ts; never discover public API by scanning source directories. UI dist/entries must contain exactly the listed JS entry files, their maps and declaration bridges; shared chunks and internal declarations stay outside. The root automated artifact-consumer suite was removed at the user's request; do not reintroduce it implicitly. Public exports remain package contracts.
+
+Shared owns Node-only Vite configuration, declaration generation and portable TypeScript defaults. Runtime packages use it only as a development dependency through built public exports. Shared bootstraps with tsc without importing itself; retain workspace build ordering. Package-specific entries, JSX/DOM environments and relative declaration emit paths remain local.
