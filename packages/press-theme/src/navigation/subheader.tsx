@@ -21,6 +21,7 @@ export function SiteSubheader({
     >
       <div className="press-subheader-inner">
         <MenuDisclosure
+          scrollContentClassName="press-directory-content"
           className="press-directory-disclosure"
           contentClassName="press-directory-panel"
           label={text.docs}

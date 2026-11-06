@@ -11,13 +11,7 @@ export default tseslint.config(
   {
     ignores: [
       "**/node_modules/**",
-      "apps/auth/public/mockServiceWorker.js",
-      "apps/account/public/mockServiceWorker.js",
-      "apps/vpn/public/mockServiceWorker.js",
-      "apps/chat/public/mockServiceWorker.js",
       "**/.pnpm-store/**",
-      "**/.next/**",
-      "**/.turbo/**",
       "**/dist/**",
       "**/.cache/**",
       "**/out/**",
@@ -26,7 +20,6 @@ export default tseslint.config(
       ".husky/_/**",
       "**/test-results/**",
       "**/playwright-report/**",
-      "**/next-env.d.ts",
       "**/.project-*/**",
       "**/.site-*/**",
     ],
@@ -52,16 +45,26 @@ export default tseslint.config(
     },
   },
   {
-    files: [
-      "*.{js,mjs,cjs}",
-      "scripts/**/*.{js,mjs,cjs,ts,mts,cts}",
-      "tests/**/*.{js,mjs,cjs,ts,mts,cts}",
-    ],
+    files: ["*.{js,mjs,cjs}", "scripts/**/*.{js,mjs,cjs,ts,mts,cts}"],
     languageOptions: { globals: globals.node },
   },
   {
-    files: ["apps/**/*.{js,jsx,ts,tsx}", "packages/**/*.{js,jsx,ts,tsx}"],
+    files: [
+      "apps/docs/src/**/*.{ts,tsx}",
+      "packages/{ui,press-theme,press-reference}/src/**/*.{ts,tsx}",
+      "packages/press/src/{react,content}/**/*.{ts,tsx}",
+      "packages/{ui,press-theme,press-reference}/tests/**/*.{ts,tsx}",
+    ],
     languageOptions: { globals: globals.browser },
+    rules: {
+      "no-restricted-globals": [
+        "error",
+        "process",
+        "Buffer",
+        "__dirname",
+        "__filename",
+      ],
+    },
   },
   {
     files: ["**/*.{jsx,tsx}"],
@@ -101,10 +104,14 @@ export default tseslint.config(
   },
   {
     files: [
+      "packages/{markdown,press,token}/tests/**/*.{ts,tsx}",
       "packages/**/scripts/**/*.mjs",
       "packages/**/tests/**/*.mjs",
       "packages/**/src/node/**/*.ts",
       "packages/**/src/site/**/*.ts",
+      "packages/markdown/src/vite/**/*.ts",
+      "packages/shared/src/**/*.ts",
+      "packages/press/src/vite/**/*.ts",
       "**/*.config.ts",
       "apps/docs/scripts/**/*.ts",
     ],
@@ -125,6 +132,19 @@ export default tseslint.config(
           ],
         },
       ],
+    },
+  },
+  {
+    files: [
+      "packages/press/src/{node,site,vite}/**/*.ts",
+      "packages/markdown/src/vite/**/*.ts",
+      "packages/shared/src/**/*.ts",
+      "**/*.config.ts",
+      "scripts/**/*.mjs",
+      "apps/docs/scripts/**/*.ts",
+    ],
+    rules: {
+      "no-restricted-globals": ["error", "window", "document", "localStorage"],
     },
   },
   prettier,

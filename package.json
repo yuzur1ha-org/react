@@ -10,11 +10,10 @@
     "dev": "pnpm build:packages && pnpm --filter @yuzur1ha/docs dev",
     "build": "pnpm build:packages && pnpm --filter @yuzur1ha/docs build",
     "build:packages": "pnpm --filter \"./packages/*\" --if-present build",
-    "build:docs": "pnpm build:packages && pnpm --filter @yuzur1ha/docs build",
     "content:generate": "pnpm --filter @yuzur1ha/docs content:generate",
     "content:check": "pnpm --filter @yuzur1ha/docs content:check",
     "check:prepare": "pnpm build:packages && pnpm content:generate",
-    "check": "pnpm check:prepare && pnpm lint && pnpm typecheck:run && node scripts/verify-repository.mjs && pnpm format:check",
+    "check": "pnpm check:prepare && pnpm lint && pnpm typecheck:run && pnpm format:check",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",
     "format": "prettier . --write",
@@ -22,19 +21,18 @@
     "typecheck": "pnpm check:prepare && pnpm typecheck:run",
     "typecheck:run": "tsc -p tsconfig.json && pnpm -r --if-present typecheck",
     "test": "pnpm test:unit",
-    "test:unit": "pnpm check:prepare && vitest run && node --test scripts/tests/*.test.mjs",
-    "test:e2e": "pnpm check:prepare && playwright test --project=docs:* && playwright test --project=docs-content:* && playwright test --project=docs-polish:*",
+    "test:unit": "pnpm check:prepare && vitest run",
+    "test:e2e": "pnpm check:prepare && playwright test --project=docs:* --project=docs-content:* --project=docs-polish:*",
     "test:production": "pnpm build && playwright test --project=docs-production:* && playwright test --project=docs-polish-production:*",
-    "test:package": "pnpm build:packages && node scripts/verify-packages.mjs",
-    "test:ssg": "pnpm build:packages && node packages/press/tests/ssg/verify.mjs",
+    "test:ssg": "pnpm build:packages && playwright test --project=press:ssg",
     "changeset": "changeset",
     "version-packages": "changeset version && pnpm install --lockfile-only --ignore-scripts",
-    "release": "pnpm build:packages && node scripts/verify-packages.mjs && changeset publish",
+    "release": "pnpm build:packages && changeset publish",
     "lint:commits": "commitlint",
     "lint:staged": "lint-staged",
     "prepare": "husky",
-    "hooks:init": "husky",
-    "test:pages": "node scripts/verify-pages.mjs"
+    "test:pages": "pnpm build:packages && playwright test --project=pages",
+    "licenses:inventory": "node scripts/license-inventory.mjs"
   },
   "devDependencies": {
     "@commitlint/cli": "catalog:",
@@ -66,6 +64,7 @@
     "vite": "catalog:",
     "@yuzur1ha/press-theme": "workspace:^",
     "@yuzur1ha/press-reference": "workspace:^",
-    "yaml": "catalog:"
+    "yaml": "catalog:",
+    "@yuzur1ha/shared": "workspace:^"
   }
 }

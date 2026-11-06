@@ -2,7 +2,7 @@ import { mediaQueries } from "@yuzur1ha/token"
 import { css } from "@emotion/react"
 export const subheaderStyles = css`
   display: none;
-  height: 48px;
+  height: var(--press-subheader-height);
   position: fixed;
   top: var(--press-header-height);
   left: var(--press-sidebar-width);
@@ -52,11 +52,13 @@ export const subheaderStyles = css`
   .press-directory-panel .yu-menu-scroll {
     padding: 0;
   }
-  .press-directory-panel .yu-menu-scroll > .yu-scroll-viewport > div {
+  .press-directory-content {
     padding: 0;
   }
   .press-directory-panel .yu-menu-scroll {
     height: min(60svh, 520px);
-    max-height: calc(100dvh - var(--press-header-height) - 48px);
+    max-height: calc(
+      100dvh - var(--press-header-height) - var(--press-subheader-height)
+    );
   }
 `

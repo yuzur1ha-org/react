@@ -12,6 +12,8 @@ export type MenuSurfaceProps = OpenStateProps & {
 
 export type MenuDisclosureProps = MenuSurfaceProps & {
   contentClassName?: string
+  /** Class for the scrollable content, separate from the disclosure panel. */
+  scrollContentClassName?: string
 }
 
 export type MenuPopoverProps = MenuSurfaceProps & {

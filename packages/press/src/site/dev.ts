@@ -90,6 +90,7 @@ export async function devSite(options: ProjectOptions & { port?: number }) {
           for (const module of graph.idToModuleMap.values())
             if (
               module.id?.split("?")[0]?.endsWith(".md") ||
+              module.id?.includes("virtual:react-router/") ||
               (module.file && inside(join(directory, "app"), module.file))
             )
               graph.invalidateModule(module)

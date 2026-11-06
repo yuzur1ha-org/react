@@ -90,6 +90,12 @@
           "type": "Ref<HTMLDivElement>",
           "required": false,
           "description": "Ref to the component\u2019s documented DOM element."
+        },
+        {
+          "name": "contentClassName",
+          "type": "string",
+          "required": false,
+          "description": "Class for the scrollable content wrapper inside the viewport."
         }
       ],
       "methods": []

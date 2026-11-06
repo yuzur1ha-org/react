@@ -175,3 +175,15 @@ it("accumulates fractional Shift wheel input and clears residual input on revers
   wheel(0.2, 161)
   expect(position).toBe(200)
 })
+
+it("places the optional content class inside the viewport without changing root class semantics", () => {
+  render(
+    <ScrollArea label="Slot" className="host" contentClassName="content">
+      <p>Slot content</p>
+    </ScrollArea>,
+  )
+  const content = screen.getByText("Slot content").parentElement
+  expect(content).toHaveClass("content")
+  expect(screen.getByRole("region", { name: "Slot" })).toContainElement(content)
+  expect(content?.closest(".host")).toHaveClass("yu-scroll-area")
+})

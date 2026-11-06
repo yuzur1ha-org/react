@@ -58,6 +58,13 @@
           "required": false,
           "description": "Additional classes applied to the component\u2019s documented root or control.",
           "default": "\"\""
+        },
+        {
+          "name": "scrollContentClassName",
+          "type": "string",
+          "required": false,
+          "description": "Class for the scrollable content wrapper inside the viewport.",
+          "default": "\"\""
         }
       ],
       "methods": []

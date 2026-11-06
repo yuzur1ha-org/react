@@ -5,6 +5,8 @@ export type ScrollAreaProps = Omit<
   ComponentPropsWithRef<typeof Primitive.Root>,
   "asChild"
 > & {
+  /** Adds a class to an optional content wrapper inside the viewport. */
+  contentClassName?: string
   label: string
   /** Defaults to contrast to preserve the existing scrollbar treatment. */
   appearance?: "normal" | "contrast" | "hidden"

@@ -1,7 +1,10 @@
 import { execFileSync } from "node:child_process"
-import { readFileSync, existsSync } from "node:fs"
-import { parse } from "yaml"
-import { publicChanges, versionOnlyChange } from "./changeset-policy.mjs"
+import { readFileSync, existsSync, readdirSync } from "node:fs"
+import {
+  publicChanges,
+  versionOnlyChange,
+  parseChangeset,
+} from "./changeset-policy.mjs"
 const base = process.env.BASE_REF
 if (!base) throw new Error("BASE_REF is required")
 const git = (args) => execFileSync("git", args, { encoding: "utf8" })
@@ -11,32 +14,43 @@ const files = git(["diff", "--name-only", `${base}...HEAD`])
 const changed = publicChanges(files)
 const isChangeset = (file) =>
   /^\.changeset\/.+\.md$/.test(file) && !file.endsWith("README.md")
-function validChangeset(source) {
-  const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]+)$/.exec(source)
-  if (!match || !match[2].trim()) return false
-  const value = parse(match[1])
-  return (
-    value !== null &&
-    typeof value === "object" &&
-    !Array.isArray(value) &&
-    Object.entries(value).every(
-      ([name, bump]) =>
-        name.startsWith("@yuzur1ha/") &&
-        ["major", "minor", "patch"].includes(bump),
-    )
-  )
-}
-const added = files.some(
-  (file) =>
-    isChangeset(file) &&
-    existsSync(file) &&
-    validChangeset(readFileSync(file, "utf8")),
+const packageNames = new Set(
+  readdirSync("packages", { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map(
+      (entry) =>
+        JSON.parse(readFileSync(`packages/${entry.name}/package.json`, "utf8"))
+          .name,
+    ),
 )
+const changedPackages = new Set(
+  changed.map(
+    (file) =>
+      JSON.parse(
+        readFileSync(`packages/${file.split("/")[1]}/package.json`, "utf8"),
+      ).name,
+  ),
+)
+const addedChangesets = files
+  .filter((file) => isChangeset(file) && existsSync(file))
+  .map((file) => {
+    const changeset = parseChangeset(readFileSync(file, "utf8"), packageNames)
+    if (!changeset) throw new Error(`Invalid Changeset: ${file}`)
+    return changeset
+  })
+const covered = new Set(
+  addedChangesets.flatMap((changeset) => Object.keys(changeset)),
+)
+const internalOnly = addedChangesets.some(
+  (changeset) => Object.keys(changeset).length === 0,
+)
+const added =
+  internalOnly || [...changedPackages].every((name) => covered.has(name))
 const consumed = files.some(
   (file) =>
     isChangeset(file) &&
     !existsSync(file) &&
-    validChangeset(git(["show", `${base}:${file}`])),
+    parseChangeset(git(["show", `${base}:${file}`]), packageNames),
 )
 const versionPR =
   consumed &&

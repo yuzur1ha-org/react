@@ -8,7 +8,7 @@
 
 A frontend toolkit for consistent interfaces and documentation: design tokens, accessible React components, a standalone Markdown compiler and YuPress static sites.
 
-**Status:** six ESM packages at 0.1.0, available in this workspace. npm publication and the GitHub Pages site are pending. Installation commands below apply after the first publication; use the workspace for evaluation today.
+**Status:** six runtime ESM packages and one shared build-tooling package at 0.1.0, available in this workspace. npm publication and the GitHub Pages site are pending. Installation commands below apply after the first publication; use the workspace for evaluation today.
 
 ## Features
 
@@ -28,6 +28,7 @@ A frontend toolkit for consistent interfaces and documentation: design tokens, a
 | [`@yuzur1ha/press`](packages/press/README.md) | Content services, CLI, SSG and unstyled React runtime. | markdown; no UI or default theme. |
 | [`@yuzur1ha/press-theme`](packages/press-theme/README.md) | Default YuPress site layout and navigation. | press, ui, token. |
 | [`@yuzur1ha/press-reference`](packages/press-reference/README.md) | Demo, source preview and schema/API tables. | press, ui, token; no default theme. |
+| [`@yuzur1ha/shared`](packages/shared/README.md) | Shared Vite, declaration generation and strict TypeScript configuration. | Development tooling; Vite peer. |
 
 Choose token for any frontend, UI for React applications, Markdown for an existing publishing pipeline, or Press for a complete content project. Theme and reference are optional adapters rather than core requirements.
 
@@ -128,9 +129,9 @@ Standard fenced code is highlighted during the build; no Shiki engine reaches th
 
 - [Markdown guide](apps/docs/src/content/markdown/index.md): compiler, plugins, Vite and typography.
 - [YuPress guide](apps/docs/src/content/press/index.md): configuration, content projects, themes, code blocks and deployment.
-- [Contributing](CONTRIBUTING.md), [architecture](docs/architecture/adr/0001-oss-packages.md), [acceptance](docs/features/oss-migration/acceptance.md) and [release runbook](docs/operations/runbooks/release.md).
+- [Contributing](CONTRIBUTING.md): development and release requirements.
 
-Run the local Docs site to follow route-based guide links. Public guides and package READMEs are English; Chinese site translations are in progress. Internal `docs/` review documents are Simplified Chinese.
+Run the local Docs site to follow route-based guide links. Public guides and package READMEs are English; Chinese site translations are in progress. Internal `.soppy/` review documents are Simplified Chinese.
 
 ## Development
 
@@ -144,9 +145,8 @@ Use pnpm 11.18.0. Docs runs at http://127.0.0.1:5173.
 | Command | Purpose |
 | --- | --- |
 | `pnpm check` | Build prerequisites, lint, types, contracts and formatting. |
-| `pnpm build` | Build six packages and the static Docs site. |
+| `pnpm build` | Build seven packages and the static Docs site. |
 | `pnpm test:unit` | Package/application unit and script tests. |
-| `pnpm test:package` | Install tarballs in isolated strict-type consumers. |
 | `pnpm test:e2e` | Development-site browser and content lifecycle checks. |
 | `pnpm test:production` | Build and test production SSG/hydration. |
 

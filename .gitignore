@@ -1,7 +1,5 @@
 # Dependencies and build output
 node_modules/
-.next/
-.turbo/
 dist/
 coverage/
 playwright-report/

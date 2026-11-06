@@ -8,7 +8,7 @@
 
 面向界面与文档的前端工具集：设计 token、可访问的 React 组件、独立 Markdown 编译器与 YuPress 静态文档站。
 
-**当前状态：**六个 ESM 包的版本均为 0.1.0，可在本工作区使用。npm 首发与 GitHub Pages 部署尚未完成。下面的安装命令用于首发之后；目前请通过工作区体验。
+**当前状态：**六个运行时 ESM 包与一个共享构建工具包的版本均为 0.1.0，可在本工作区使用。npm 首发与 GitHub Pages 部署尚未完成。下面的安装命令用于首发之后；目前请通过工作区体验。
 
 ## 能力
 
@@ -28,6 +28,7 @@
 | [`@yuzur1ha/press`](packages/press/README.md) | 内容服务、CLI、SSG 与无样式 React 运行时。 | 依赖 markdown；不依赖 UI/默认主题。 |
 | [`@yuzur1ha/press-theme`](packages/press-theme/README.md) | 默认 YuPress 布局与导航。 | 依赖 press、ui、token。 |
 | [`@yuzur1ha/press-reference`](packages/press-reference/README.md) | Demo、源码预览与 schema/API 表格。 | 依赖 press、ui、token；不依赖默认主题。 |
+| [`@yuzur1ha/shared`](packages/shared/README.md) | 共享 Vite、声明生成与严格 TypeScript 配置。 | 开发工具；Vite peer。 |
 
 任意前端可选择 token；React 应用可选择 UI；已有发布链路可使用 Markdown；完整内容项目可使用 Press。主题与 reference 是可选适配层。
 
@@ -128,9 +129,9 @@ pnpm exec yupress preview
 
 - [Markdown 指南](apps/docs/src/content/markdown/index.md)：编译器、插件、Vite 与排版。
 - [YuPress 指南](apps/docs/src/content/press/index.md)：配置、内容项目、主题、代码块与部署。
-- [贡献指南](CONTRIBUTING.md)、[架构](docs/architecture/adr/0001-oss-packages.md)、[验收记录](docs/features/oss-migration/acceptance.md)与[发布手册](docs/operations/runbooks/release.md)。
+- [贡献指南](CONTRIBUTING.md)：开发与发布要求。
 
-在本地 Docs 站点中可使用指南的路由链接。公开指南与子包 README 使用英文，站点中文翻译正在进行中；内部 `docs/` 审阅文档使用简体中文。
+在本地 Docs 站点中可使用指南的路由链接。公开指南与子包 README 使用英文，站点中文翻译正在进行中；内部 `.soppy/` 审阅文档使用简体中文。
 
 ## 开发
 
@@ -144,9 +145,8 @@ pnpm dev
 | 命令                   | 用途                                        |
 | ---------------------- | ------------------------------------------- |
 | `pnpm check`           | 构建前置产物，检查 lint、类型、契约与格式。 |
-| `pnpm build`           | 构建六包与 Docs 静态站点。                  |
+| `pnpm build`           | 构建七包与 Docs 静态站点。                  |
 | `pnpm test:unit`       | 包、应用与脚本单元测试。                    |
-| `pnpm test:package`    | 在隔离环境安装 tarball 并严格检查类型。     |
 | `pnpm test:e2e`        | 开发站点浏览器与内容生命周期检查。          |
 | `pnpm test:production` | 构建并验证生产 SSG 与补水。                 |
 

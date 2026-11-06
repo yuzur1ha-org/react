@@ -5,7 +5,11 @@ export const layoutStyles = css`
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  --press-sidebar-width: 256px;
+  --press-sidebar-width: ${pressLayout.sidebarWidth}px;
+  --press-reading-width: ${pressLayout.readingWidth}px;
+  --press-outline-width: ${pressLayout.outlineWidth}px;
+  --press-reading-gap: ${pressLayout.readingGap}px;
+  --press-subheader-height: ${pressLayout.subheader}px;
   --press-brand-inset: ${pressLayout.brandInset}px;
   --press-header-expanded: ${pressLayout.headerExpanded}px;
   --press-header-height: var(--press-header-expanded);
@@ -45,24 +49,26 @@ export const layoutStyles = css`
   }
   .press-reading {
     display: grid;
-    grid-template-columns: minmax(0, 800px) 160px;
+    grid-template-columns: minmax(0, var(--press-reading-width)) var(
+        --press-outline-width
+      );
     justify-content: center;
-    gap: 40px;
+    gap: var(--press-reading-gap);
     padding: 48px;
     min-width: 0;
   }
   &[data-has-outline="false"] .press-reading {
-    grid-template-columns: minmax(0, 800px);
+    grid-template-columns: minmax(0, var(--press-reading-width));
   }
   .press-reading > [role="status"] {
     grid-column: 1 / -1;
   }
   @media ${mediaQueries.belowDesktop} {
     &[data-has-outline="true"] {
-      --press-subheader-space: 48px;
+      --press-subheader-space: var(--press-subheader-height);
     }
     .press-reading {
-      grid-template-columns: minmax(0, 800px);
+      grid-template-columns: minmax(0, var(--press-reading-width));
       padding: 40px 32px;
     }
     &[data-layout="docs"] .press-layout {
@@ -77,8 +83,8 @@ export const layoutStyles = css`
     }
   }
   @media ${mediaQueries.phone} {
-    --press-brand-inset: 20px;
-    --press-subheader-space: 48px;
+    --press-brand-inset: ${pressLayout.brandInsetPhone}px;
+    --press-subheader-space: var(--press-subheader-height);
     --press-loading-left: 0px;
     &[data-layout="docs"] {
       --press-loading-left: 0px;

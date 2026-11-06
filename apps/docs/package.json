@@ -7,10 +7,11 @@
     "build": "yupress build && node scripts/copy-licenses.mjs",
     "preview": "yupress preview --port 5173",
     "typecheck": "tsc -p tsconfig.json",
-    "test:e2e": "pnpm -w test:e2e:docs",
+    "test:e2e": "pnpm -w test:e2e",
     "content:generate": "yupress generate",
     "content:check": "yupress check",
-    "test": "pnpm -w test:unit --project=docs"
+    "test": "pnpm -w test:unit --project=docs",
+    "test:pages": "pnpm -w test:pages"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",

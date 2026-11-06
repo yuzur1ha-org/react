@@ -41,6 +41,7 @@ export function MenuDisclosure(props: MenuDisclosureProps) {
     children,
     className = "",
     contentClassName = "",
+    scrollContentClassName = "",
     size = "small",
   } = props
   const [open, setOpen] = useMenuOpen(props)
@@ -70,6 +71,7 @@ export function MenuDisclosure(props: MenuDisclosureProps) {
           label={label}
           overscrollBehavior="contain"
           className="yu-menu-scroll"
+          contentClassName={`yu-menu-scroll-content ${scrollContentClassName}`}
           viewportProps={{ tabIndex: -1 }}
         >
           <DismissMenu.Provider

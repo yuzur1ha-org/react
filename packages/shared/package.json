@@ -1,0 +1,60 @@
+{
+  "name": "@yuzur1ha/shared",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Shared build configuration for Yuzur1ha packages.",
+  "exports": {
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "import": "./dist/vite.js"
+    },
+    "./tsconfig/base.json": "./tsconfig/base.json",
+    "./declarations": {
+      "types": "./dist/declarations.d.ts",
+      "import": "./dist/declarations.js"
+    }
+  },
+  "files": [
+    "dist",
+    "bin",
+    "tsconfig",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "pnpm -w test:unit --project=shared"
+  },
+  "peerDependencies": {
+    "vite": "^8.3.5",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "vite": "catalog:",
+    "typescript": "catalog:",
+    "@types/node": "catalog:"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "^24.0.0 || ^26.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soppylzz/yuzur1ha-oss.git",
+    "directory": "packages/shared"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "yu-build-declarations": "./bin/declarations.mjs"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  }
+}

@@ -1,12 +1,15 @@
+/** @jsxImportSource @emotion/react */
 import { useTokens } from "@yuzur1ha/ui"
 import { toHeroUIVariables } from "@yuzur1ha/token"
 import { Button, Input } from "@heroui/react"
 import "./hero-ui.css"
+import { heroUIStyles } from "./hero-ui.styles"
 
 export function HeroUIPreview() {
   const theme = useTokens()
   return (
     <section
+      css={heroUIStyles}
       className="hero-ui-preview"
       data-theme="yuzur1ha"
       style={toHeroUIVariables(theme)}

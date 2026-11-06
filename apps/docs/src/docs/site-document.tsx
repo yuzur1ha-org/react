@@ -2,8 +2,9 @@ import { defineDocument } from "@yuzur1ha/press/react"
 import { type ComponentType } from "react"
 import type { DocumentMetadata } from "./document.types"
 import { ReferenceDocument } from "@yuzur1ha/press-reference"
-import "../content/examples/shared.css"
-import "../content/examples/scroll.css"
+import { Global } from "@emotion/react"
+import { sharedStyles } from "../content/examples/shared.styles"
+import { scrollStyles } from "../content/examples/scroll.styles"
 import "@yuzur1ha/token/fonts.css"
 
 export function DocsDocument({
@@ -13,10 +14,15 @@ export function DocsDocument({
   metadata: DocumentMetadata
   Content: ComponentType
 }) {
-  return metadata.kind === "page" ? (
-    <Content />
-  ) : (
-    <ReferenceDocument metadata={metadata} Content={Content} />
+  return (
+    <>
+      <Global styles={[sharedStyles, scrollStyles]} />
+      {metadata.kind === "page" ? (
+        <Content />
+      ) : (
+        <ReferenceDocument metadata={metadata} Content={Content} />
+      )}
+    </>
   )
 }
 

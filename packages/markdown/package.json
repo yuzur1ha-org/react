@@ -31,7 +31,7 @@
     }
   },
   "scripts": {
-    "build": "vite build && node ../../scripts/build-declarations.mjs",
+    "build": "vite build && yu-build-declarations --shim src/client.ts=client.d.ts",
     "typecheck": "tsc -p tsconfig.json",
     "test": "pnpm -w test:unit --project=markdown"
   },
@@ -61,7 +61,8 @@
     "@vitejs/plugin-react": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "vite": "catalog:"
+    "vite": "catalog:",
+    "@yuzur1ha/shared": "workspace:^"
   },
   "license": "MIT",
   "description": "Markdown compilation, plugins and Vite transforms.",

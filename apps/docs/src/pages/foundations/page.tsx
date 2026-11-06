@@ -1,4 +1,5 @@
-import "./foundations.css"
+import { Global } from "@emotion/react"
+import { foundationsStyles } from "./foundations.styles"
 import { useTokens } from "@yuzur1ha/ui"
 import { HeroUIPreview } from "./hero-ui-preview"
 import { ThemePreview } from "./theme-preview"
@@ -7,6 +8,7 @@ export default function Foundations() {
   const theme = useTokens()
   return (
     <>
+      <Global styles={foundationsStyles} />
       <div className="section-heading">
         <span className="eyebrow">00 / FOUNDATIONS</span>
         <h1>A considered foundation.</h1>

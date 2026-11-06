@@ -46,7 +46,7 @@ const selectors = process.argv.flatMap((value, index, args) =>
 const allNames = Object.keys(suites) as SuiteName[]
 if (process.argv.includes("test") && !selectors.length)
   throw new Error(
-    "Select a suite with --project=<suite>:* (docs, docs-production, docs-content, docs-polish or docs-polish-production)",
+    "Select a suite with --project=<suite>:* (docs, docs-production, docs-content, docs-polish, docs-polish-production, pages or press:ssg)",
   )
 const names = allNames.filter((name) =>
   selectors.length
@@ -75,28 +75,40 @@ export default defineConfig({
       url: `http://127.0.0.1:${suites[name].port}`,
       reuseExistingServer: false,
     })),
-  projects: allNames.flatMap((name) =>
-    (name.startsWith("docs-polish")
-      ? ["chromium", "webkit"]
-      : name === "docs-content"
-        ? ["desktop"]
-        : ["desktop", "mobile"]
-    ).map((viewport) => ({
-      name: `${name}:${viewport}`,
-      testMatch: suites[name].tests,
-      use: {
-        ...(viewport === "webkit"
-          ? devices["Desktop Safari"]
-          : viewport === "chromium"
-            ? devices["Desktop Chrome"]
-            : viewport === "desktop"
+  projects: [
+    ...allNames.flatMap((name) =>
+      (name.startsWith("docs-polish")
+        ? ["chromium", "webkit"]
+        : name === "docs-content"
+          ? ["desktop"]
+          : ["desktop", "mobile"]
+      ).map((viewport) => ({
+        name: `${name}:${viewport}`,
+        testMatch: suites[name].tests,
+        use: {
+          ...(viewport === "webkit"
+            ? devices["Desktop Safari"]
+            : viewport === "chromium"
               ? devices["Desktop Chrome"]
-              : {
-                  ...devices["iPhone 13"],
-                  defaultBrowserType: "chromium" as const,
-                }),
-        baseURL: `http://127.0.0.1:${suites[name].port}`,
-      },
-    })),
-  ),
+              : viewport === "desktop"
+                ? devices["Desktop Chrome"]
+                : {
+                    ...devices["iPhone 13"],
+                    defaultBrowserType: "chromium" as const,
+                  }),
+          baseURL: `http://127.0.0.1:${suites[name].port}`,
+        },
+      })),
+    ),
+    {
+      name: "pages",
+      testMatch: ["apps/docs/tests/pages.e2e.mjs"],
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "press:ssg",
+      testMatch: ["packages/press/tests/ssg/site.e2e.mjs"],
+      use: { ...devices["Desktop Chrome"] },
+    },
+  ],
 })

@@ -37,7 +37,7 @@
     }
   },
   "scripts": {
-    "build": "vite build && node ../../scripts/build-declarations.mjs",
+    "build": "vite build && yu-build-declarations",
     "typecheck": "tsc -p tsconfig.json",
     "test": "pnpm -w test:unit --project=press"
   },
@@ -58,7 +58,8 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "catalog:",
-    "vite": "catalog:"
+    "vite": "catalog:",
+    "@yuzur1ha/shared": "workspace:^"
   },
   "peerDependencies": {
     "react": "^19.3.1",

@@ -27,7 +27,7 @@
     "./markdown.css": "./dist/markdown.css"
   },
   "scripts": {
-    "build": "vite build && node ../../scripts/build-declarations.mjs && node scripts/build.mjs",
+    "build": "vite build && yu-build-declarations && node scripts/build.mjs",
     "typecheck": "tsc -p tsconfig.json",
     "test": "pnpm -w test:unit --project=token"
   },
@@ -56,5 +56,8 @@
   },
   "engines": {
     "node": "^24.0.0 || ^26.0.0"
+  },
+  "devDependencies": {
+    "@yuzur1ha/shared": "workspace:^"
   }
 }

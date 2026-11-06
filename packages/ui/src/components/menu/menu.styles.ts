@@ -175,7 +175,7 @@ export const menuDisclosureStyles = themed(css`
   &.yu-menu-disclosure .yu-menu-scroll {
     max-height: 50svh;
   }
-  &.yu-menu-disclosure .yu-menu-scroll > .yu-scroll-viewport > div {
+  &.yu-menu-disclosure .yu-menu-scroll-content {
     padding: 16px 0;
   }
 `)

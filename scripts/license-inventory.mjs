@@ -1,4 +1,4 @@
-import { readdir, readFile, writeFile } from "node:fs/promises"
+import { readdir, readFile, writeFile, mkdir } from "node:fs/promises"
 import { resolve } from "node:path"
 const inventory = []
 for (const entry of await readdir("packages", { withFileTypes: true })) {
@@ -9,6 +9,7 @@ for (const entry of await readdir("packages", { withFileTypes: true })) {
   for (const dependency of Object.keys({
     ...manifest.dependencies,
     ...manifest.peerDependencies,
+    ...manifest.optionalDependencies,
   }).sort()) {
     if (dependency.startsWith("@yuzur1ha/")) continue
     const value = JSON.parse(
@@ -25,7 +26,8 @@ for (const entry of await readdir("packages", { withFileTypes: true })) {
     })
   }
 }
+await mkdir(".soppy", { recursive: true })
 await writeFile(
-  "docs/dependencies.json",
+  ".soppy/dependencies.json",
   JSON.stringify(inventory, null, 2) + "\n",
 )

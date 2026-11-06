@@ -19,6 +19,7 @@ const overscrollPolicies = [
 
 export function ScrollArea({
   label,
+  contentClassName,
   appearance = "contrast",
   orientation = "vertical",
   overscrollBehavior = "auto",
@@ -78,7 +79,11 @@ export function ScrollArea({
         }}
         className={`yu-scroll-viewport ${viewportProps?.className ?? ""}`}
       >
-        {children}
+        {contentClassName ? (
+          <div className={contentClassName}>{children}</div>
+        ) : (
+          children
+        )}
       </Primitive.Viewport>
       {orientation !== "horizontal" && (
         <Primitive.Scrollbar orientation="vertical" className="yu-scrollbar">
