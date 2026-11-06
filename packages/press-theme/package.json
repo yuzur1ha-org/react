@@ -1,0 +1,66 @@
+{
+  "name": "@yuzur1ha/press-theme",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "vite build && node ../../scripts/build-declarations.mjs",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "pnpm -w test:unit --project=press-theme"
+  },
+  "license": "MIT",
+  "description": "Default React documentation theme.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soppylzz/yuzur1ha-oss.git",
+    "directory": "packages/press-theme"
+  },
+  "homepage": "https://github.com/soppylzz/yuzur1ha-oss#readme",
+  "bugs": {
+    "url": "https://github.com/soppylzz/yuzur1ha-oss/issues"
+  },
+  "keywords": [
+    "yuzur1ha",
+    "typescript",
+    "esm"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": "^24.0.0 || ^26.0.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "dependencies": {
+    "@yuzur1ha/press": "workspace:^",
+    "@yuzur1ha/token": "workspace:^",
+    "@yuzur1ha/ui": "workspace:^",
+    "@emotion/cache": "11.14.0",
+    "lucide-react": "1.61.0"
+  },
+  "peerDependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router": "^8.5.0",
+    "@emotion/react": "^11.14.0"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router": "catalog:",
+    "vite": "catalog:"
+  }
+}
