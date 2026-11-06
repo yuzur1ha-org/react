@@ -9,10 +9,7 @@ concurrency:
   group: release-main
   cancel-in-progress: false
 jobs:
-  quality:
-    uses: ./.github/workflows/quality.yml
   release-pr:
-    needs: quality
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
@@ -47,7 +44,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app.outputs.token || github.token }}
   npm:
-    needs: [quality, release-pr]
+    needs: release-pr
     if: github.ref == 'refs/heads/main' && vars.RELEASE_ENABLED == 'true' && needs.release-pr.outputs.has-changesets == 'false'
     runs-on: ubuntu-latest
     environment: release
@@ -79,7 +76,7 @@ jobs:
           GITHUB_TOKEN: ${{ steps.app.outputs.token || github.token }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   docs-build:
-    needs: quality
+    if: vars.PAGES_ENABLED == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5

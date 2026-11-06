@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process"
-import { readFileSync, existsSync, readdirSync } from "node:fs"
+import { readFileSync, existsSync, readdirSync, appendFileSync } from "node:fs"
 import {
   publicChanges,
   versionOnlyChange,
@@ -67,3 +67,6 @@ if (changed.length && !added && !versionPR)
   throw new Error(
     "Public changes require a valid Changeset; internal-only changes may use {} with a reason. Consuming changesets is permitted only for version-only changes.",
   )
+
+if (process.env.GITHUB_OUTPUT)
+  appendFileSync(process.env.GITHUB_OUTPUT, `version-pr=${versionPR}\n`)
