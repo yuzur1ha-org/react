@@ -150,7 +150,7 @@ pnpm dev
 | `pnpm test:e2e`        | 开发站点浏览器与内容生命周期检查。          |
 | `pnpm test:production` | 构建并验证生产 SSG 与补水。                 |
 
-包行为变更请运行 `pnpm changeset`，选择受影响的包并编写英文摘要。独立版本和内部依赖升级由 Changesets 管理，保留其生成的 README；发布前阅读发布手册。
+包行为变更请运行 `pnpm changeset`，选择受影响的包并编写英文摘要。独立版本和内部依赖升级由 Changesets 管理，保留其生成的 README；版本号与 CHANGELOG 由 GitHub Actions 通过发布 PR 更新，不在本地生成；npm 发布有独立门禁。
 
 ## 限制与状态
 

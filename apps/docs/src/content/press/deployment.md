@@ -20,4 +20,4 @@ Set `site.base` to `/` for a domain root or `/repository-name/` for a project si
 
 ## GitHub Pages checklist
 
-For this repository the planned project base is `/yuzur1ha-oss/`. Deploy only a verified main build. Verify static asset URLs, deep-link refreshes, locale navigation and real 404 behavior against the same base. Pages hosting and npm publication are separate workflows; a deployment failure does not justify republishing package versions. The public site is not yet deployed.
+For this repository the planned project base is `/react/`. Deploy only a verified main build. Verify static asset URLs, deep-link refreshes, locale navigation and real 404 behavior against the same base. Pages hosting and npm publication are separate workflows; a deployment failure does not justify republishing package versions. The public site is not yet deployed.

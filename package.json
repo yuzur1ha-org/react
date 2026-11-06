@@ -66,5 +66,13 @@
     "@yuzur1ha/press-reference": "workspace:^",
     "yaml": "catalog:",
     "@yuzur1ha/shared": "workspace:^"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuzur1ha-org/react.git"
+  },
+  "homepage": "https://github.com/yuzur1ha-org/react#readme",
+  "bugs": {
+    "url": "https://github.com/yuzur1ha-org/react/issues"
   }
 }

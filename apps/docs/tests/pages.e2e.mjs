@@ -24,7 +24,7 @@ test("serves root and subpath builds with hydration, licenses and deep links", a
   const output = join(temporary, "dist")
   await mkdir(join(repository, "test-results/pages"), { recursive: true })
   try {
-    for (const base of ["/", "/yuzur1ha-oss/"]) {
+    for (const base of ["/", "/react/"]) {
       await run("pnpm", ["exec", "yupress", "build", "--out-dir", output], {
         cwd: root,
         env: { ...process.env, YUPRESS_BASE: base },

@@ -13,7 +13,9 @@ pnpm test:production
 
 Run `pnpm dev` for Docs. Use built public exports across packages, strict TypeScript and extensionless relative source imports. Do not commit build output, caches or reports.
 
-Run `pnpm changeset` to generate a release record for public changes. Write its summary in English so generated changelogs remain English. Documentation/internal maintenance may use an empty changeset with a reason. Keep the CLI-generated `.changeset/README.md` unchanged. Follow Conventional Commits with English subjects; hooks run lint-staged and commitlint.
+Run `pnpm changeset` to generate a release record for public changes. Write its summary in English so generated changelogs remain English. Documentation/internal maintenance may use an empty changeset with a reason. Keep the CLI-generated `.changeset/README.md` unchanged. Version bumps and CHANGELOG generation are performed by the GitHub release PR workflow; do not run `pnpm version-packages` locally. Review and merge that PR after CI passes. npm publication remains separately gated by `RELEASE_ENABLED` and the `release` environment. The repository is [yuzur1ha-org/react](https://github.com/yuzur1ha-org/react), with Pages built for `/react/`.
+
+Follow Conventional Commits with English subjects; hooks run lint-staged and commitlint.
 
 Only the root README is bilingual. Package and application READMEs are concise English; third-party notices and Changesets are English. English usage guides live in the Docs application, while its Chinese pages are translation-in-progress notices. Internal review documents under `.soppy/` remain Simplified Chinese. Agent instructions and code comments use English.
 

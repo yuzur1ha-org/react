@@ -68,7 +68,7 @@ test("desktop actions are text, icons then theme; reading bars have a distinct s
   const github = actions.getByRole("link", { name: "GitHub", exact: true })
   await expect(github).toHaveAttribute(
     "href",
-    "https://github.com/soppylzz/yuzur1ha-oss",
+    "https://github.com/yuzur1ha-org/react",
   )
   await expect(github).toHaveAttribute("rel", "noopener noreferrer")
   const order = await actions

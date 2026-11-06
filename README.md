@@ -150,7 +150,7 @@ Use pnpm 11.18.0. Docs runs at http://127.0.0.1:5173.
 | `pnpm test:e2e` | Development-site browser and content lifecycle checks. |
 | `pnpm test:production` | Build and test production SSG/hydration. |
 
-For package behavior changes, run `pnpm changeset`, select the affected packages and write an English summary. Independent versions and dependency propagation use Changesets; retain its generated README. See the release runbook before any publication.
+For package behavior changes, run `pnpm changeset`, select the affected packages and write an English summary. Independent versions and dependency propagation use Changesets; retain its generated README. GitHub Actions prepares version bumps and CHANGELOG files in a release PR; do not generate them locally. npm publication is separately gated.
 
 ## Limitations and status
 

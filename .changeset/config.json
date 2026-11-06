@@ -3,7 +3,7 @@
   "changelog": [
     "@changesets/changelog-github",
     {
-      "repo": "soppylzz/yuzur1ha-oss"
+      "repo": "yuzur1ha-org/react"
     }
   ],
   "commit": false,

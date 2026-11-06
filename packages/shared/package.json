@@ -43,7 +43,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/soppylzz/yuzur1ha-oss.git",
+    "url": "git+https://github.com/yuzur1ha-org/react.git",
     "directory": "packages/shared"
   },
   "publishConfig": {
@@ -56,5 +56,9 @@
     "typescript": {
       "optional": true
     }
+  },
+  "homepage": "https://github.com/yuzur1ha-org/react#readme",
+  "bugs": {
+    "url": "https://github.com/yuzur1ha-org/react/issues"
   }
 }

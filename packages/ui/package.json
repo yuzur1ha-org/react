@@ -55,12 +55,12 @@
   "description": "Accessible React components with scoped design tokens.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/soppylzz/yuzur1ha-oss.git",
+    "url": "git+https://github.com/yuzur1ha-org/react.git",
     "directory": "packages/ui"
   },
-  "homepage": "https://github.com/soppylzz/yuzur1ha-oss#readme",
+  "homepage": "https://github.com/yuzur1ha-org/react#readme",
   "bugs": {
-    "url": "https://github.com/soppylzz/yuzur1ha-oss/issues"
+    "url": "https://github.com/yuzur1ha-org/react/issues"
   },
   "keywords": [
     "yuzur1ha",

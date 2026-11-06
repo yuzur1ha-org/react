@@ -31,3 +31,7 @@ Declaration generation now runs through the shared yu-build-declarations CLI, wi
 ## Test and tooling layout
 
 The user requested deleting the root tests/ directory. Repository policy tests, tarball consumer fixtures and their command/CI gates are removed rather than relocated. Vitest runs package/application tests; Playwright runs browser tests. Root scripts retains only Changeset maintenance and license inventory. Do not recreate the deleted suites without explicit authorization. Historical acceptance results describe their earlier snapshots and do not imply these gates still exist.
+
+## Repository and release workflow update
+
+The user authorized local commits and migration of origin to https://github.com/yuzur1ha-org/react.git. Commit fc77ddf contains the workspace consolidation. No push or publication has been performed. Local version preparation was reverted; all seven packages remain at 0.1.0 with pending Changesets. Version and CHANGELOG changes belong to the GitHub release PR. Repository metadata and Pages base target the new repository; external App permissions, npm trust, CI and Pages hosting remain unverified.

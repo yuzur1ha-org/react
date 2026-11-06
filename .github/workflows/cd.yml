@@ -11,14 +11,47 @@ concurrency:
 jobs:
   quality:
     uses: ./.github/workflows/quality.yml
-  npm:
+  release-pr:
     needs: quality
-    if: github.ref == 'refs/heads/main' && vars.RELEASE_ENABLED == 'true'
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      has-changesets: ${{ steps.changesets.outputs.has-changesets }}
+    steps:
+      - uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        id: app
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+          token: ${{ steps.app.outputs.token }}
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
+        id: changesets
+        with:
+          github-token: ${{ steps.app.outputs.token }}
+          version-script: pnpm version-packages
+          pr-title: "chore: release packages"
+          commit-message: "chore: version packages"
+        env:
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+  npm:
+    needs: [quality, release-pr]
+    if: github.ref == 'refs/heads/main' && vars.RELEASE_ENABLED == 'true' && needs.release-pr.outputs.has-changesets == 'false'
     runs-on: ubuntu-latest
     environment: release
     permissions:
       contents: write
-      pull-requests: write
       id-token: write
     steps:
       - uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
@@ -36,14 +69,10 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build:packages
       - uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
         with:
           github-token: ${{ steps.app.outputs.token }}
-          version-script: pnpm version-packages
           publish-script: pnpm release
-          pr-title: "chore: release packages"
-          commit-message: "chore: version packages"
         env:
           GITHUB_TOKEN: ${{ steps.app.outputs.token }}
   docs-build:
@@ -59,7 +88,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
         env:
-          YUPRESS_BASE: /yuzur1ha-oss/
+          YUPRESS_BASE: /react/
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: apps/docs/dist

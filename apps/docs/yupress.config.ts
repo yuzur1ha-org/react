@@ -215,7 +215,7 @@ export default defineConfig({
     links: [
       {
         label: "GitHub",
-        href: "https://github.com/soppylzz/yuzur1ha-oss",
+        href: "https://github.com/yuzur1ha-org/react",
         icon: "github",
       },
     ],
