@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- [#1](https://github.com/yuzur1ha-org/react/pull/1): Add accessible CodePanel, CodeActions and CodeDisclosure components for highlighted code. Add optional ScrollArea.contentClassName and MenuDisclosure.scrollContentClassName slots. Preserve component subpath imports through a controlled public entry directory.
+- [#1](https://github.com/yuzur1ha-org/react/pull/1): Add an accessible CodePanel component for highlighted code. Add optional ScrollArea.contentClassName and MenuDisclosure.scrollContentClassName slots. Preserve component subpath imports through a controlled public entry directory.
 
 ### Dependencies
 
