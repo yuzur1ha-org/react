@@ -1,0 +1,252 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "popover",
+  "parts": [
+    {
+      "name": "Popover",
+      "typeName": "PopoverProps",
+      "description": "A portalled Radix popover anchored to one trigger element. Positioning, dismissal and focus callbacks apply to the content element.",
+      "props": [
+        {
+          "name": "trigger",
+          "type": "ReactElement",
+          "required": true,
+          "description": "One ref-capable action element used as the popover trigger."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the popover content."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "description": "Controlled open state. Pair with onOpenChange."
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "required": false,
+          "description": "Initial open state when open is omitted."
+        },
+        {
+          "name": "onOpenChange",
+          "type": "((open: boolean) => void)",
+          "required": false,
+          "description": "Called when opening or closing is requested."
+        },
+        {
+          "name": "modal",
+          "type": "boolean",
+          "required": false,
+          "description": "Trap focus and disable outside interaction while open.",
+          "default": "false"
+        },
+        {
+          "name": "showArrow",
+          "type": "boolean",
+          "required": false,
+          "description": "Render the decorative arrow pointing to the trigger.",
+          "default": "true"
+        },
+        {
+          "name": "side",
+          "type": "\"left\" | \"right\" | \"bottom\" | \"top\"",
+          "required": false,
+          "description": "Preferred placement side; collision handling can choose another side.",
+          "default": "\"bottom\""
+        },
+        {
+          "name": "sideOffset",
+          "type": "number",
+          "required": false,
+          "description": "Gap in pixels between the trigger and content.",
+          "default": "8"
+        },
+        {
+          "name": "align",
+          "type": "\"center\" | \"start\" | \"end\"",
+          "required": false,
+          "description": "Preferred alignment relative to the trigger.",
+          "default": "\"start\""
+        },
+        {
+          "name": "alignOffset",
+          "type": "number",
+          "required": false,
+          "description": "Pixel offset from the selected alignment.",
+          "default": "0"
+        },
+        {
+          "name": "arrowPadding",
+          "type": "number",
+          "required": false,
+          "description": "Minimum distance in pixels between the arrow and the content corners.",
+          "default": "0"
+        },
+        {
+          "name": "avoidCollisions",
+          "type": "boolean",
+          "required": false,
+          "description": "Adjust placement to keep content within the collision boundary.",
+          "default": "true"
+        },
+        {
+          "name": "collisionBoundary",
+          "type": "(Element | null) | (Element | null)[]",
+          "required": false,
+          "description": "Element or elements used as the placement boundary; omitted uses the viewport."
+        },
+        {
+          "name": "collisionPadding",
+          "type": "number | Partial<Record<\"left\" | \"right\" | \"bottom\" | \"top\", number>>",
+          "required": false,
+          "description": "Pixel padding inside the collision boundary, globally or per side.",
+          "default": "12"
+        },
+        {
+          "name": "sticky",
+          "type": "(\"partial\" | \"always\")",
+          "required": false,
+          "description": "Radix sticky-placement strategy: partial or always.",
+          "default": "\"partial\""
+        },
+        {
+          "name": "hideWhenDetached",
+          "type": "boolean",
+          "required": false,
+          "description": "Hide content when its anchor is detached from the visible boundary.",
+          "default": "false"
+        },
+        {
+          "name": "updatePositionStrategy",
+          "type": "(\"always\" | \"optimized\")",
+          "required": false,
+          "description": "Reposition with the optimized or always strategy.",
+          "default": "\"optimized\""
+        },
+        {
+          "name": "forceMount",
+          "type": "true",
+          "required": false,
+          "description": "Keep the Radix content mounted for externally managed visibility or animation. The consumer must manage its closed presentation."
+        },
+        {
+          "name": "onEscapeKeyDown",
+          "type": "((event: KeyboardEvent) => void)",
+          "required": false,
+          "description": "Called before Escape dismisses the surface; prevent default to keep it open."
+        },
+        {
+          "name": "onPointerDownOutside",
+          "type": "((event: CustomEvent<{ originalEvent: PointerEvent; }>) => void)",
+          "required": false,
+          "description": "Called for a pointer press outside the content; prevent default to cancel dismissal."
+        },
+        {
+          "name": "onFocusOutside",
+          "type": "((event: CustomEvent<{ originalEvent: FocusEvent; }>) => void)",
+          "required": false,
+          "description": "Called when focus moves outside the content; prevent default to cancel the associated outside interaction."
+        },
+        {
+          "name": "onInteractOutside",
+          "type": "((event: CustomEvent<{ originalEvent: PointerEvent; }> | CustomEvent<{ originalEvent: FocusEvent; }>) => void)",
+          "required": false,
+          "description": "Called for pointer or focus interaction outside the content; prevent default to cancel dismissal."
+        },
+        {
+          "name": "onOpenAutoFocus",
+          "type": "((event: Event) => void)",
+          "required": false,
+          "description": "Called before focus enters opened content; prevent default to choose the focus target."
+        },
+        {
+          "name": "onCloseAutoFocus",
+          "type": "((event: Event) => void)",
+          "required": false,
+          "description": "Called before focus returns after closing; prevent default when navigation manages focus."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLDivElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "PopoverClose",
+      "typeName": "ComponentPropsWithRef<typeof PopoverClose>",
+      "description": "Closes the nearest matching overlay. Use asChild with one ref-capable action element, or render the default native button.",
+      "props": [
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "required": false,
+          "description": "Render through one child element instead of the default element. The child must forward its ref and accept the supplied props.",
+          "default": "false"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "onClick",
+          "type": "MouseEventHandler<HTMLButtonElement>",
+          "required": false,
+          "description": "Native activation handler."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control."
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLButtonElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

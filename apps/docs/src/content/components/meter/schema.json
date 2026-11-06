@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "meter",
+  "parts": [
+    {
+      "name": "Meter",
+      "typeName": "MeterProps",
+      "description": "A labelled meter with a bounded visual value. Values must be finite and max must exceed min. Native div attributes and ref apply to the wrapper.",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Visible label and accessible name."
+        },
+        {
+          "name": "value",
+          "type": "number",
+          "required": true,
+          "description": "Finite measurement. Display and accessibility values are clamped to the configured range."
+        },
+        {
+          "name": "min",
+          "type": "number",
+          "required": false,
+          "description": "Finite lower bound; must be less than max.",
+          "default": "0"
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "required": false,
+          "description": "Finite upper bound; must exceed min.",
+          "default": "100"
+        },
+        {
+          "name": "valueText",
+          "type": "string",
+          "required": false,
+          "description": "Custom visible value text and aria-valuetext. Otherwise the visible value is a percentage."
+        },
+        {
+          "name": "showValue",
+          "type": "boolean",
+          "required": false,
+          "description": "Show the value text beside the label; meter semantics remain when hidden.",
+          "default": "true"
+        },
+        {
+          "name": "tone",
+          "type": "\"default\" | \"danger\"",
+          "required": false,
+          "description": "Meter palette: default ink or danger.",
+          "default": "\"default\""
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLDivElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

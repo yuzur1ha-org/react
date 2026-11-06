@@ -1,0 +1,489 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "menu",
+  "parts": [
+    {
+      "name": "MenuDisclosure",
+      "typeName": "MenuDisclosureProps",
+      "description": "An inline disclosure trigger and scrollable menu panel. Escape closes the panel and restores trigger focus; item selection closes it by default.",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Text and accessible name of the built-in disclosure trigger."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "description": "Controlled open state. Pair with onOpenChange."
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "required": false,
+          "description": "Initial open state when open is omitted.",
+          "default": "false"
+        },
+        {
+          "name": "onOpenChange",
+          "type": "((open: boolean) => void)",
+          "required": false,
+          "description": "Called when opening or closing is requested."
+        },
+        {
+          "name": "size",
+          "type": "ComponentSize",
+          "required": false,
+          "description": "Size of the built-in trigger.",
+          "default": "\"small\""
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "contentClassName",
+          "type": "string",
+          "required": false,
+          "description": "Classes on the expanded content wrapper.",
+          "default": "\"\""
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "MenuPopover",
+      "typeName": "MenuPopoverProps",
+      "description": "A popover menu with a built-in button trigger. Item selection closes it by default; onCloseAutoFocus can preserve navigation-driven focus.",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Text of the built-in trigger and accessible name of the popover."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "description": "Controlled open state. Pair with onOpenChange."
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "required": false,
+          "description": "Initial open state when open is omitted.",
+          "default": "false"
+        },
+        {
+          "name": "onOpenChange",
+          "type": "((open: boolean) => void)",
+          "required": false,
+          "description": "Called when opening or closing is requested."
+        },
+        {
+          "name": "size",
+          "type": "ComponentSize",
+          "required": false,
+          "description": "Size of the built-in trigger.",
+          "default": "\"small\""
+        },
+        {
+          "name": "triggerAppearance",
+          "type": "\"text\" | \"primary\" | \"secondary\"",
+          "required": false,
+          "description": "Appearance of the built-in trigger button.",
+          "default": "\"text\""
+        },
+        {
+          "name": "onCloseAutoFocus",
+          "type": "((event: Event) => void)",
+          "required": false,
+          "description": "Called before focus returns after closing; prevent default when navigation manages focus."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "ResponsiveMenu",
+      "typeName": "ResponsiveMenuProps",
+      "description": "One menu subtree presented inline at \u22651024px, in a Popover at 640\u20131023px and in a left Drawer below 640px. Crossing layouts remounts the subtree and closes open surfaces.",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Accessible surface title for the popover or drawer."
+        },
+        {
+          "name": "triggerLabel",
+          "type": "string",
+          "required": true,
+          "description": "Text or accessible label of the narrow-layout navigation trigger."
+        },
+        {
+          "name": "closeLabel",
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the drawer close action."
+        },
+        {
+          "name": "layout",
+          "type": "\"popover\" | \"inline\" | \"responsive\" | \"drawer\"",
+          "required": false,
+          "description": "Responsive by default: desktop inline, tablet popover, phone drawer. Explicit values force one presentation.",
+          "default": "\"responsive\""
+        },
+        {
+          "name": "triggerIconOnly",
+          "type": "boolean",
+          "required": false,
+          "description": "Visually hide trigger text while retaining triggerLabel as its accessible name.",
+          "default": "false"
+        },
+        {
+          "name": "triggerAppearance",
+          "type": "\"text\" | \"primary\" | \"secondary\"",
+          "required": false,
+          "description": "Appearance of the popover/drawer trigger button.",
+          "default": "\"secondary\""
+        },
+        {
+          "name": "triggerSize",
+          "type": "ComponentSize",
+          "required": false,
+          "description": "Size of the popover/drawer trigger button.",
+          "default": "\"medium\""
+        },
+        {
+          "name": "drawerProps",
+          "type": "Pick<DrawerProps, \"className\" | \"headerActions\" | \"headerContent\" | \"bodyClassName\">",
+          "required": false,
+          "description": "Header actions/content and body/root classes forwarded only to the drawer layout."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "Menu",
+      "typeName": "MenuProps",
+      "description": "A native nav container providing size, orientation and active-style context to menu items. Native nav attributes and ref are forwarded.",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Accessible name for the navigation landmark."
+        },
+        {
+          "name": "appearance",
+          "type": "\"default\" | \"subtle\"",
+          "required": false,
+          "description": "Container/item treatment: default or subtle.",
+          "default": "\"default\""
+        },
+        {
+          "name": "activeAppearance",
+          "type": "\"subtle\" | \"solid\" | \"emphasis\"",
+          "required": false,
+          "description": "Default active-item style: subtle marker, solid contrast, or emphasis with text scale and ink color.",
+          "default": "\"subtle\""
+        },
+        {
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\"",
+          "required": false,
+          "description": "Vertical navigation list or horizontal navigation row.",
+          "default": "\"vertical\""
+        },
+        {
+          "name": "size",
+          "type": "ComponentSize",
+          "required": false,
+          "description": "Visual size: small, medium or large.",
+          "default": "\"medium\""
+        },
+        {
+          "name": "groupGap",
+          "type": "number",
+          "required": false,
+          "description": "Gap in pixels between groups; omitted uses the size-dependent spacing token."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "MenuGroup",
+      "typeName": "MenuGroupProps",
+      "description": "A labelled group of menu items. Native div attributes and ref apply to the group wrapper.",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Visible group heading and accessible group name."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLDivElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "MenuItem",
+      "typeName": "MenuItemProps",
+      "description": "A native navigation link with active and disabled states. Disabled items lose href and keyboard tab access. Native anchor attributes are forwarded.",
+      "props": [
+        {
+          "name": "href",
+          "type": "string",
+          "required": true,
+          "description": "Navigation destination."
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "required": false,
+          "description": "Mark the item current. Defaults aria-current to page; an explicit aria-current can select location."
+        },
+        {
+          "name": "activeAppearance",
+          "type": "\"subtle\" | \"solid\" | \"emphasis\"",
+          "required": false,
+          "description": "Override the active style inherited from Menu: subtle, solid, or emphasis.",
+          "default": "Inherits Menu"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Remove href and tab access and prevent activation."
+        },
+        {
+          "name": "dismissOnSelect",
+          "type": "boolean",
+          "required": false,
+          "description": "Close the enclosing menu on unmodified primary activation, even when onClick prevents navigation.",
+          "default": "true"
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Decorative leading icon."
+        },
+        {
+          "name": "trailing",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Trailing content, such as a count or shortcut."
+        },
+        {
+          "name": "target",
+          "type": "HTMLAttributeAnchorTarget",
+          "required": false,
+          "description": "Browsing context for the linked destination, such as _self or _blank."
+        },
+        {
+          "name": "rel",
+          "type": "string",
+          "required": false,
+          "description": "Link relationship tokens. New-window links also receive noopener noreferrer."
+        },
+        {
+          "name": "aria-current",
+          "type": "boolean | \"time\" | \"true\" | \"false\" | \"step\" | \"page\" | \"location\" | \"date\"",
+          "required": false,
+          "description": "Current navigation position. Used only when active is true; defaults to page."
+        },
+        {
+          "name": "onClick",
+          "type": "MouseEventHandler<HTMLAnchorElement>",
+          "required": false,
+          "description": "Native link activation handler; prevent default to handle navigation in the app."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLAnchorElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "MenuAction",
+      "typeName": "MenuActionProps",
+      "description": "A native button for menu actions. Prevent default in onClick to keep the enclosing menu open. Native button attributes are forwarded.",
+      "props": [
+        {
+          "name": "dismissOnSelect",
+          "type": "boolean",
+          "required": false,
+          "description": "Close the enclosing menu after activation unless onClick prevents default.",
+          "default": "true"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "type",
+          "type": "\"button\" | \"submit\" | \"reset\"",
+          "required": false,
+          "description": "Native control type.",
+          "default": "\"button\""
+        },
+        {
+          "name": "onClick",
+          "type": "MouseEventHandler<HTMLButtonElement>",
+          "required": false,
+          "description": "Native activation handler."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Native form submission field name."
+        },
+        {
+          "name": "value",
+          "type": "string | number | readonly string[]",
+          "required": false,
+          "description": "Current native control value. Pair with onChange for controlled input."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLButtonElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

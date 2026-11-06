@@ -1,0 +1,155 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "number-field",
+  "parts": [
+    {
+      "name": "NumberField",
+      "typeName": "NumberFieldProps",
+      "description": "A text spinbutton with exact decimal stepping and custom increment/decrement buttons. Native input attributes and ref target the text input; value changes use onValueChange.",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Visible label and accessible name."
+        },
+        {
+          "name": "hint",
+          "type": "string",
+          "required": false,
+          "description": "Supporting field guidance, associated with the control."
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "description": "Error message. Replaces hint text and marks the field invalid."
+        },
+        {
+          "name": "value",
+          "type": "number | null",
+          "required": false,
+          "description": "Controlled finite number or null for an empty field."
+        },
+        {
+          "name": "defaultValue",
+          "type": "number | null",
+          "required": false,
+          "description": "Initial finite number or null when uncontrolled.",
+          "default": "null"
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: number | null) => void)",
+          "required": false,
+          "description": "Called with the edited/committed number or null when cleared."
+        },
+        {
+          "name": "min",
+          "type": "number",
+          "required": false,
+          "description": "Optional finite lower bound. Must not exceed max."
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "required": false,
+          "description": "Optional finite upper bound. Must not be less than min."
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "required": false,
+          "description": "Positive finite decimal increment; stepping is anchored to min or zero.",
+          "default": "1"
+        },
+        {
+          "name": "incrementLabel",
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the increment action."
+        },
+        {
+          "name": "decrementLabel",
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the decrement action."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "readOnly",
+          "type": "boolean",
+          "required": false,
+          "description": "Keeps the current value readable and focusable while preventing editing."
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "required": false,
+          "description": "Requires a non-empty native control value during form validation."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Native form submission field name."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "description": "Text shown when the control has no value."
+        },
+        {
+          "name": "onKeyDown",
+          "type": "KeyboardEventHandler<HTMLInputElement>",
+          "required": false,
+          "description": "Native key handler. Prevent default to skip built-in Arrow/Home/End/Enter handling."
+        },
+        {
+          "name": "onFocus",
+          "type": "FocusEventHandler<HTMLInputElement>",
+          "required": false,
+          "description": "Called when the native control receives focus."
+        },
+        {
+          "name": "onBlur",
+          "type": "FocusEventHandler<HTMLInputElement>",
+          "required": false,
+          "description": "Called when the native control loses focus."
+        },
+        {
+          "name": "aria-describedby",
+          "type": "string",
+          "required": false,
+          "description": "IDs of additional descriptive elements; field components merge these with their hint or error ID."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "Native control ID. Generated when omitted; the visible label and supporting text use this association."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLInputElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

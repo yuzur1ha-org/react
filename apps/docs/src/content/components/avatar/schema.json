@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "avatar",
+  "parts": [
+    {
+      "name": "Avatar",
+      "typeName": "AvatarProps",
+      "description": "An image with initials as fallback. Native span attributes and ref apply to the wrapper; name determines its accessible label.",
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "description": "Accessible image name and source of up to two fallback initials."
+        },
+        {
+          "name": "src",
+          "type": "string",
+          "required": false,
+          "description": "Image URL. Missing or failed images fall back to initials."
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"large\"",
+          "required": false,
+          "description": "Avatar dimensions: small or large.",
+          "default": "\"large\""
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLSpanElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

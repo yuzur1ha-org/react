@@ -1,0 +1,111 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "input-otp",
+  "parts": [
+    {
+      "name": "InputOTP",
+      "typeName": "InputOTPProps",
+      "description": "A controlled six-digit input with visual slots. Native input attributes and ref target the input; className styles the outer field. Type, numeric input mode and one-time-code autocomplete are fixed.",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Visible label and accessible name."
+        },
+        {
+          "name": "hint",
+          "type": "string",
+          "required": false,
+          "description": "Supporting field guidance, associated with the control."
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "description": "Error message. Replaces hint text and marks the field invalid."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": true,
+          "description": "Controlled digits shown in the six slots. Keep application state limited to at most six digits."
+        },
+        {
+          "name": "onValueChange",
+          "type": "(value: string) => void",
+          "required": true,
+          "description": "Called with at most six digits after editing or paste; non-digits are removed."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "required": false,
+          "description": "Requires a non-empty native control value during form validation."
+        },
+        {
+          "name": "readOnly",
+          "type": "boolean",
+          "required": false,
+          "description": "Keeps the current value readable and focusable while preventing editing."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Native form submission field name."
+        },
+        {
+          "name": "onPaste",
+          "type": "ClipboardEventHandler<HTMLInputElement>",
+          "required": false,
+          "description": "Native paste handler; prevent default to skip built-in digit extraction."
+        },
+        {
+          "name": "onFocus",
+          "type": "FocusEventHandler<HTMLInputElement>",
+          "required": false,
+          "description": "Called when the native control receives focus."
+        },
+        {
+          "name": "onBlur",
+          "type": "FocusEventHandler<HTMLInputElement>",
+          "required": false,
+          "description": "Called when the native control loses focus."
+        },
+        {
+          "name": "aria-describedby",
+          "type": "string",
+          "required": false,
+          "description": "IDs of additional descriptive elements; field components merge these with their hint or error ID."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes on the outer labelled field wrapper.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "Native control ID. Generated when omitted; the visible label and supporting text use this association."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLInputElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

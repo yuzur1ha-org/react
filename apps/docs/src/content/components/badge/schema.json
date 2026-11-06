@@ -1,0 +1,100 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "badge",
+  "parts": [
+    {
+      "name": "Badge",
+      "typeName": "BadgeProps",
+      "description": "A count, dot or text indicator attached to child content. Native span attributes and ref apply to the outer wrapper.",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "description": "Anchor content that remains interactive when the indicator is hidden."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Accessible indicator label; also the fallback text for variant=\"label\"."
+        },
+        {
+          "name": "variant",
+          "type": "\"label\" | \"count\" | \"dot\"",
+          "required": false,
+          "description": "Choose a count, a dot or a text label.",
+          "default": "\"count\""
+        },
+        {
+          "name": "count",
+          "type": "number",
+          "required": false,
+          "description": "Non-negative integer count, used by the count variant.",
+          "default": "0"
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "required": false,
+          "description": "Positive integer display cap. Larger counts display max followed by +.",
+          "default": "99"
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": false,
+          "description": "Visible text for the label variant; falls back to label."
+        },
+        {
+          "name": "showZero",
+          "type": "boolean",
+          "required": false,
+          "description": "Keep a zero-count indicator visible.",
+          "default": "false"
+        },
+        {
+          "name": "invisible",
+          "type": "boolean",
+          "required": false,
+          "description": "Hide the indicator while preserving its child content.",
+          "default": "false"
+        },
+        {
+          "name": "position",
+          "type": "\"top-end\" | \"top-start\" | \"bottom-end\" | \"bottom-start\"",
+          "required": false,
+          "description": "Corner where the indicator is attached to its anchor.",
+          "default": "\"top-end\""
+        },
+        {
+          "name": "tone",
+          "type": "\"default\" | \"danger\"",
+          "required": false,
+          "description": "Indicator palette: default ink or danger.",
+          "default": "\"default\""
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLSpanElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

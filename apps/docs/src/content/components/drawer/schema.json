@@ -1,0 +1,206 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "drawer",
+  "parts": [
+    {
+      "name": "Drawer",
+      "typeName": "DrawerProps",
+      "description": "A modal dialog that slides from one edge. Content is portalled with focus management and page scroll locking. Native dialog-content attributes are forwarded.",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "description": "Controlled open state. Pair with onOpenChange."
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "required": false,
+          "description": "Initial open state when open is omitted."
+        },
+        {
+          "name": "onOpenChange",
+          "type": "((open: boolean) => void)",
+          "required": false,
+          "description": "Called when opening or closing is requested."
+        },
+        {
+          "name": "trigger",
+          "type": "ReactElement",
+          "required": true,
+          "description": "One ref-capable action element used as the drawer trigger."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "description": "Accessible dialog title, rendered in the header."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false,
+          "description": "Optional accessible description rendered below the heading."
+        },
+        {
+          "name": "closeLabel",
+          "type": "string",
+          "required": true,
+          "description": "Accessible name for the built-in close action."
+        },
+        {
+          "name": "side",
+          "type": "\"left\" | \"right\" | \"bottom\"",
+          "required": false,
+          "description": "Screen edge from which the drawer opens.",
+          "default": "\"right\""
+        },
+        {
+          "name": "headerActions",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Additional actions placed beside the built-in close button."
+        },
+        {
+          "name": "headerContent",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Additional header content beneath the title/action row."
+        },
+        {
+          "name": "bodyClassName",
+          "type": "string",
+          "required": false,
+          "description": "Classes applied to the scrollable drawer-body wrapper.",
+          "default": "\"\""
+        },
+        {
+          "name": "footer",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Optional footer rendered after the body."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "forceMount",
+          "type": "true",
+          "required": false,
+          "description": "Keep the Radix content mounted for externally managed visibility or animation. The consumer must manage its closed presentation."
+        },
+        {
+          "name": "onEscapeKeyDown",
+          "type": "((event: KeyboardEvent) => void)",
+          "required": false,
+          "description": "Called before Escape dismisses the surface; prevent default to keep it open."
+        },
+        {
+          "name": "onPointerDownOutside",
+          "type": "((event: CustomEvent<{ originalEvent: PointerEvent; }>) => void)",
+          "required": false,
+          "description": "Called for a pointer press outside the content; prevent default to cancel dismissal."
+        },
+        {
+          "name": "onFocusOutside",
+          "type": "((event: CustomEvent<{ originalEvent: FocusEvent; }>) => void)",
+          "required": false,
+          "description": "Called when focus moves outside the content; prevent default to cancel the associated outside interaction."
+        },
+        {
+          "name": "onInteractOutside",
+          "type": "((event: CustomEvent<{ originalEvent: PointerEvent; }> | CustomEvent<{ originalEvent: FocusEvent; }>) => void)",
+          "required": false,
+          "description": "Called for pointer or focus interaction outside the content; prevent default to cancel dismissal."
+        },
+        {
+          "name": "onOpenAutoFocus",
+          "type": "((event: Event) => void)",
+          "required": false,
+          "description": "Called before focus enters opened content; prevent default to choose the focus target."
+        },
+        {
+          "name": "onCloseAutoFocus",
+          "type": "((event: Event) => void)",
+          "required": false,
+          "description": "Called before focus returns after closing; prevent default when navigation manages focus."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLDivElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "DrawerClose",
+      "typeName": "ComponentPropsWithRef<typeof DrawerClose>",
+      "description": "Closes the nearest matching overlay. Use asChild with one ref-capable action element, or render the default native button.",
+      "props": [
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "required": false,
+          "description": "Render through one child element instead of the default element. The child must forward its ref and accept the supplied props.",
+          "default": "false"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "onClick",
+          "type": "MouseEventHandler<HTMLButtonElement>",
+          "required": false,
+          "description": "Native activation handler."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control."
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLButtonElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

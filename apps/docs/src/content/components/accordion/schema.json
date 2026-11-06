@@ -1,0 +1,230 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "accordion",
+  "parts": [
+    {
+      "name": "Accordion",
+      "typeName": "AccordionProps",
+      "description": "Radix accordion root. Set type=\"single\" for one open item or \"multiple\" for an array of open items. Native div attributes are forwarded.",
+      "props": [
+        {
+          "name": "type",
+          "type": "\"multiple\" | \"single\"",
+          "required": true,
+          "description": "Required state mode. single uses string values; multiple uses string arrays."
+        },
+        {
+          "name": "value",
+          "type": "string | string[]",
+          "required": false,
+          "description": "Controlled open item value (single) or values (multiple)."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string | string[]",
+          "required": false,
+          "description": "Initial open item value or values when uncontrolled."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string) => void) | ((value: string[]) => void)",
+          "required": false,
+          "description": "Called with a string in single mode or a string array in multiple mode."
+        },
+        {
+          "name": "collapsible",
+          "type": "boolean",
+          "required": false,
+          "description": "In single mode, allow the currently open item to close. Not used in multiple mode.",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disable all triggers in this accordion."
+        },
+        {
+          "name": "orientation",
+          "type": "(\"vertical\" | \"horizontal\")",
+          "required": false,
+          "description": "Layout and keyboard navigation axis.",
+          "default": "\"vertical\""
+        },
+        {
+          "name": "dir",
+          "type": "(\"ltr\" | \"rtl\")",
+          "required": false,
+          "description": "Text and keyboard direction: ltr or rtl."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "required": false,
+          "description": "Render through one child element instead of the default element. The child must forward its ref and accept the supplied props."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLDivElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "AccordionItem",
+      "typeName": "AccordionItemProps",
+      "description": "An accordion item with a stable value unique within its root. Native div attributes are forwarded.",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "required": true,
+          "description": "Stable, non-empty item identifier unique within the accordion."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disable this item\u2019s trigger."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "required": false,
+          "description": "Render through one child element instead of the default element. The child must forward its ref and accept the supplied props."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLDivElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "AccordionTrigger",
+      "typeName": "AccordionTriggerProps",
+      "description": "A native button inside an accordion heading. The component owns its label and chevron layout; asChild is not supported.",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "onClick",
+          "type": "MouseEventHandler<HTMLButtonElement>",
+          "required": false,
+          "description": "Native activation handler."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLButtonElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "AccordionContent",
+      "typeName": "AccordionContentProps",
+      "description": "Expandable accordion panel with an inner spacing wrapper. Native attributes and ref apply to the outer panel.",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "forceMount",
+          "type": "true",
+          "required": false,
+          "description": "Keep the Radix content mounted for externally managed visibility or animation. The consumer must manage its closed presentation."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLDivElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

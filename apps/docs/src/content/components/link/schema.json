@@ -1,0 +1,202 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "link",
+  "parts": [
+    {
+      "name": "Link",
+      "typeName": "LinkProps",
+      "description": "A styled anchor with optional corner arrow and hover line. Primary and secondary appearances reuse button styles without press scaling. Native anchor attributes are forwarded.",
+      "props": [
+        {
+          "name": "href",
+          "type": "string",
+          "required": true,
+          "description": "Navigation destination."
+        },
+        {
+          "name": "size",
+          "type": "ComponentSize",
+          "required": false,
+          "description": "Visual size: small, medium or large.",
+          "default": "\"medium\""
+        },
+        {
+          "name": "appearance",
+          "type": "\"text\" | \"primary\" | \"secondary\"",
+          "required": false,
+          "description": "Text link or button-styled primary/secondary anchor, without press scaling.",
+          "default": "\"text\""
+        },
+        {
+          "name": "showIcon",
+          "type": "boolean",
+          "required": false,
+          "description": "Show a decorative arrow at the upper-right edge of the link text.",
+          "default": "true"
+        },
+        {
+          "name": "underline",
+          "type": "boolean",
+          "required": false,
+          "description": "Enables the animated underline on hover or keyboard focus. The anchor never has a persistent underline.",
+          "default": "true"
+        },
+        {
+          "name": "target",
+          "type": "HTMLAttributeAnchorTarget",
+          "required": false,
+          "description": "Browsing context for the linked destination, such as _self or _blank."
+        },
+        {
+          "name": "rel",
+          "type": "string",
+          "required": false,
+          "description": "Link relationship tokens. New-window links also receive noopener noreferrer."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "onClick",
+          "type": "MouseEventHandler<HTMLAnchorElement>",
+          "required": false,
+          "description": "Native activation handler."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component’s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLAnchorElement>",
+          "required": false,
+          "description": "Ref to the component’s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "Link.Container",
+      "typeName": "LinkContainerProps",
+      "description": "A semantic anchor that provides hover, focus and size context without button appearance. Compose Link.Underline inside it.",
+      "props": [
+        {
+          "name": "href",
+          "type": "string",
+          "required": true,
+          "description": "Navigation destination."
+        },
+        {
+          "name": "size",
+          "type": "ComponentSize",
+          "required": false,
+          "description": "Size context used by nested Link.Underline elements; adds no button appearance.",
+          "default": "\"medium\""
+        },
+        {
+          "name": "target",
+          "type": "HTMLAttributeAnchorTarget",
+          "required": false,
+          "description": "Browsing context for the linked destination, such as _self or _blank."
+        },
+        {
+          "name": "rel",
+          "type": "string",
+          "required": false,
+          "description": "Link relationship tokens. New-window links also receive noopener noreferrer."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "onClick",
+          "type": "MouseEventHandler<HTMLAnchorElement>",
+          "required": false,
+          "description": "Native activation handler."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component’s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLAnchorElement>",
+          "required": false,
+          "description": "Ref to the component’s documented DOM element."
+        },
+        {
+          "name": "underline",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Enables the animated underline on hover or keyboard focus. The anchor never has a persistent underline."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "Link.Underline",
+      "typeName": "LinkUnderlineProps",
+      "description": "A span drawing a straight underline when its Link.Container is hovered or focus-visible. Small and medium sizes use the same line thickness.",
+      "props": [
+        {
+          "name": "size",
+          "type": "ComponentSize",
+          "required": false,
+          "description": "Override the container’s size for this underline. Small and medium use equal line thickness.",
+          "default": "Inherits Link.Container"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component’s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLSpanElement>",
+          "required": false,
+          "description": "Ref to the component’s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

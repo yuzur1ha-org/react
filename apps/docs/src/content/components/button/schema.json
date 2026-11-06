@@ -1,0 +1,149 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "button",
+  "parts": [
+    {
+      "name": "Button",
+      "typeName": "ButtonProps",
+      "description": "A native action button with loading and press feedback. Native button attributes and ref are forwarded; type defaults to button.",
+      "props": [
+        {
+          "name": "appearance",
+          "type": "\"primary\" | \"secondary\" | \"text\"",
+          "required": false,
+          "description": "Visual treatment: solid primary, bordered secondary or text.",
+          "default": "\"primary\""
+        },
+        {
+          "name": "scaleOnPress",
+          "type": "boolean",
+          "required": false,
+          "description": "Allow press scaling. Set false for navigation-like actions.",
+          "default": "true"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "required": false,
+          "description": "Shows a spinner, sets aria-busy and disables activation.",
+          "default": "false"
+        },
+        {
+          "name": "size",
+          "type": "ComponentSize",
+          "required": false,
+          "description": "Visual size: small, medium or large.",
+          "default": "\"medium\""
+        },
+        {
+          "name": "type",
+          "type": "\"button\" | \"submit\" | \"reset\"",
+          "required": false,
+          "description": "Native button behavior. Defaults to button to avoid accidental form submission.",
+          "default": "\"button\""
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Native form submission field name."
+        },
+        {
+          "name": "value",
+          "type": "string | number | readonly string[]",
+          "required": false,
+          "description": "Value submitted when this button is used as the form submitter."
+        },
+        {
+          "name": "onClick",
+          "type": "MouseEventHandler<HTMLButtonElement>",
+          "required": false,
+          "description": "Native activation handler."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "aria-label",
+          "type": "string",
+          "required": false,
+          "description": "Accessible name when a visible label does not already name the element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLButtonElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "CloseButton",
+      "typeName": "CloseButtonProps",
+      "description": "An icon-only close action. Always renders a native type=\"button\" control; label supplies its accessible name.",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Accessible name of the icon-only close action."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "onClick",
+          "type": "MouseEventHandler<HTMLButtonElement>",
+          "required": false,
+          "description": "Native activation handler."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLButtonElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

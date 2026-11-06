@@ -1,0 +1,591 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "form",
+  "parts": [
+    {
+      "name": "Form",
+      "typeName": "FormProps",
+      "description": "Radix form root using native constraint validation. Use FormField, FormLabel and FormControl for native controls, not a nested TextField or non-native Select.",
+      "props": [
+        {
+          "name": "onClearServerErrors",
+          "type": "(() => void)",
+          "required": false,
+          "description": "Clear previous server errors before the submit callback and after an uncancelled reset. Editing alone does not invoke it."
+        },
+        {
+          "name": "onSubmit",
+          "type": "SubmitEventHandler<HTMLFormElement>",
+          "required": false,
+          "description": "Called after native validation permits form submission. Prevent default for client-side handling."
+        },
+        {
+          "name": "onReset",
+          "type": "ReactEventHandler<HTMLFormElement>",
+          "required": false,
+          "description": "Native reset handler. Prevent default to cancel reset and server-error clearing."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Native form submission field name."
+        },
+        {
+          "name": "target",
+          "type": "string",
+          "required": false,
+          "description": "Browsing context for the linked destination, such as _self or _blank."
+        },
+        {
+          "name": "action",
+          "type": "string | ((formData: FormData) => void | Promise<void>)",
+          "required": false,
+          "description": "Native form submission destination or React form action."
+        },
+        {
+          "name": "method",
+          "type": "string",
+          "required": false,
+          "description": "Native form submission method."
+        },
+        {
+          "name": "noValidate",
+          "type": "boolean",
+          "required": false,
+          "description": "Skip built-in constraint validation during form submission."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "required": false,
+          "description": "Render through one child element instead of the default element. The child must forward its ref and accept the supplied props."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLFormElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "FormField",
+      "typeName": "FormFieldProps",
+      "description": "Groups one named native field with its label and validation messages. Native div attributes are forwarded.",
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "description": "Field name shared by its native control, label and validation messages."
+        },
+        {
+          "name": "serverInvalid",
+          "type": "boolean",
+          "required": false,
+          "description": "Mark the field invalid from a server response."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "required": false,
+          "description": "Render through one child element instead of the default element. The child must forward its ref and accept the supplied props."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLDivElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "FormLabel",
+      "typeName": "FormLabelProps",
+      "description": "Label associated with a field by name or the surrounding FormField. Native label attributes are forwarded.",
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Target field name; inherited from the surrounding FormField when omitted."
+        },
+        {
+          "name": "htmlFor",
+          "type": "string",
+          "required": false,
+          "description": "ID of the native control labelled by this element."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "required": false,
+          "description": "Render through one child element instead of the default element. The child must forward its ref and accept the supplied props."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLLabelElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "FormControl",
+      "typeName": "FormControlProps",
+      "description": "Native input validation integration. Use asChild with a single Input or TextareaInput; this does not add native validation to Select.",
+      "props": [
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "required": false,
+          "description": "Compose with one native-input-compatible child, such as Input or TextareaInput. Select is not a native validation control."
+        },
+        {
+          "name": "type",
+          "type": "HTMLInputTypeAttribute",
+          "required": false,
+          "description": "Native control type."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Native form submission field name."
+        },
+        {
+          "name": "value",
+          "type": "string | number | readonly string[]",
+          "required": false,
+          "description": "Current native control value. Pair with onChange for controlled input."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string | number | readonly string[]",
+          "required": false,
+          "description": "Initial value used when the native control is uncontrolled."
+        },
+        {
+          "name": "onChange",
+          "type": "ChangeEventHandler<HTMLInputElement, HTMLInputElement>",
+          "required": false,
+          "description": "Native input change handler. Read value or checked from event.currentTarget."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "required": false,
+          "description": "Requires a non-empty native control value during form validation."
+        },
+        {
+          "name": "readOnly",
+          "type": "boolean",
+          "required": false,
+          "description": "Keeps the current value readable and focusable while preventing editing."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "description": "Text shown when the control has no value."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLInputElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "FormMessage",
+      "typeName": "FormMessageProps",
+      "description": "Conditional validation feedback for a named field. Renders when match succeeds or forceMatch is true.",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Target field name; inherited from the surrounding FormField when omitted."
+        },
+        {
+          "name": "match",
+          "type": "\"badInput\" | \"patternMismatch\" | \"rangeOverflow\" | \"rangeUnderflow\" | \"stepMismatch\" | \"tooLong\" | \"tooShort\" | \"typeMismatch\" | \"valid\" | \"valueMissing\" | (((value: string, formData: FormData) => boolean) | ((value: string, formData: FormData) => Promise<boolean>))",
+          "required": false,
+          "description": "Native ValidityState key or custom matcher deciding when the message appears."
+        },
+        {
+          "name": "forceMatch",
+          "type": "boolean",
+          "required": false,
+          "description": "Show the message independently of the current validation result."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "required": false,
+          "description": "Render through one child element instead of the default element. The child must forward its ref and accept the supplied props."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLSpanElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "FormDescription",
+      "typeName": "FormDescriptionProps",
+      "description": "Persistent field guidance associated with the native control. Does not accept match or forceMatch.",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Target field name; inherited from the surrounding FormField when omitted."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "required": false,
+          "description": "Render through one child element instead of the default element. The child must forward its ref and accept the supplied props."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLSpanElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "FormFieldset",
+      "typeName": "FormFieldsetProps",
+      "description": "A native fieldset for grouping related form controls, including group-level disabled state.",
+      "props": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Native form submission field name."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLFieldSetElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "FormLegend",
+      "typeName": "FormLegendProps",
+      "description": "A native legend naming a FormFieldset.",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLLegendElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "FormActions",
+      "typeName": "FormActionsProps",
+      "description": "A div arranging form action controls. Native div attributes and ref are forwarded.",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLDivElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "FormSubmit",
+      "typeName": "FormSubmitProps",
+      "description": "A Radix submit button styled as a primary action. Use asChild to compose a custom submit control.",
+      "props": [
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "required": false,
+          "description": "Render through one child element instead of the default element. The child must forward its ref and accept the supplied props."
+        },
+        {
+          "name": "type",
+          "type": "\"button\" | \"submit\" | \"reset\"",
+          "required": false,
+          "description": "Native button behavior. With asChild, ensure the child retains type=\"submit\".",
+          "default": "\"submit\""
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Content rendered inside the component."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "onClick",
+          "type": "MouseEventHandler<HTMLButtonElement>",
+          "required": false,
+          "description": "Native activation handler."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Native form submission field name."
+        },
+        {
+          "name": "value",
+          "type": "string | number | readonly string[]",
+          "required": false,
+          "description": "Current native control value. Pair with onChange for controlled input."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component\u2019s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "DOM identifier for the rendered element."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLButtonElement>",
+          "required": false,
+          "description": "Ref to the component\u2019s documented DOM element."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "FormValidityState",
+      "typeName": "FormValidityStateProps",
+      "description": "Render-prop access to a native field\u2019s validity state. Does not render an extra DOM element.",
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Target field name; inherited from the surrounding FormField when omitted."
+        },
+        {
+          "name": "children",
+          "type": "(validity: ValidityState | undefined) => ReactNode",
+          "required": true,
+          "description": "Render function receiving the native ValidityState or undefined before the control is available."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

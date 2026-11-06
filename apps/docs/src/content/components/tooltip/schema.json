@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "tooltip",
+  "parts": [
+    {
+      "name": "Tooltip",
+      "typeName": "TooltipProps",
+      "description": "A short text tooltip for one ref-capable trigger element. Opens after 250ms; positioning uses Radix collision handling.",
+      "props": [
+        {
+          "name": "content",
+          "type": "string",
+          "required": true,
+          "description": "Short plain-text tooltip message."
+        },
+        {
+          "name": "side",
+          "type": "\"left\" | \"right\" | \"bottom\" | \"top\"",
+          "required": false,
+          "description": "Preferred side of the trigger; collision handling can change placement.",
+          "default": "\"top\""
+        },
+        {
+          "name": "children",
+          "type": "ReactElement",
+          "required": true,
+          "description": "One ref-capable trigger element that accepts Radix interaction props."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

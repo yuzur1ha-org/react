@@ -1,0 +1,157 @@
+{
+  "$schema": "../../../../schemas/component-api.schema.json",
+  "component": "select",
+  "parts": [
+    {
+      "name": "Select",
+      "typeName": "SelectProps",
+      "description": "A labelled Radix select with owned trigger content. Native trigger attributes and ref apply to its button; asChild and custom children are not supported. Selection changes use onValueChange.",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Visible label and accessible name."
+        },
+        {
+          "name": "hint",
+          "type": "string",
+          "required": false,
+          "description": "Supporting field guidance, associated with the control."
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "description": "Error message. Replaces hint text and marks the field invalid."
+        },
+        {
+          "name": "options",
+          "type": "readonly SelectOption[]",
+          "required": true,
+          "description": "Ordered options with unique non-empty values, labels and optional disabled states."
+        },
+        {
+          "name": "size",
+          "type": "ComponentSize",
+          "required": false,
+          "description": "Visual size: small, medium or large.",
+          "default": "\"medium\""
+        },
+        {
+          "name": "appearance",
+          "type": "\"text\" | \"field\"",
+          "required": false,
+          "description": "Bordered field treatment or borderless text trigger.",
+          "default": "\"field\""
+        },
+        {
+          "name": "font",
+          "type": "\"body\" | \"mono\"",
+          "required": false,
+          "description": "Font role shared by the trigger and portalled options.",
+          "default": "\"body\""
+        },
+        {
+          "name": "hideLabel",
+          "type": "boolean",
+          "required": false,
+          "description": "Visually hide the label while preserving its accessible association.",
+          "default": "false"
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "description": "Controlled selected option value; an empty string clears selection."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "required": false,
+          "description": "Initial selected option value when uncontrolled."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string) => void)",
+          "required": false,
+          "description": "Called with the selected option value."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "description": "Text shown when the control has no value."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disables the native control."
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "required": false,
+          "description": "Require a selection for the owning native form."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Name of the hidden native form control used to submit the selection."
+        },
+        {
+          "name": "form",
+          "type": "string",
+          "required": false,
+          "description": "ID of the form receiving the hidden native selection control."
+        },
+        {
+          "name": "onKeyDown",
+          "type": "KeyboardEventHandler<HTMLButtonElement>",
+          "required": false,
+          "description": "Native key handler. Prevent default to skip built-in keyboard behavior."
+        },
+        {
+          "name": "onPointerDown",
+          "type": "PointerEventHandler<HTMLButtonElement>",
+          "required": false,
+          "description": "Native pointer-down handler. Prevent default to skip built-in pointer behavior."
+        },
+        {
+          "name": "aria-invalid",
+          "type": "boolean | \"true\" | \"false\" | \"grammar\" | \"spelling\"",
+          "required": false,
+          "description": "Marks the native control invalid for assistive technology."
+        },
+        {
+          "name": "aria-describedby",
+          "type": "string",
+          "required": false,
+          "description": "IDs of additional descriptive elements; field components merge these with their hint or error ID."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes applied to the component’s documented root or control.",
+          "default": "\"\""
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "Native control ID. Generated when omitted; the visible label and supporting text use this association."
+        },
+        {
+          "name": "ref",
+          "type": "Ref<HTMLButtonElement>",
+          "required": false,
+          "description": "Ref to the component’s documented DOM element."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

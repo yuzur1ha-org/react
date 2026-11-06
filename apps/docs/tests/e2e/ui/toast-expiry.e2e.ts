@@ -1,0 +1,71 @@
+import { expect, test } from "@playwright/test"
+import { openDocument } from "../../helpers/open-document"
+
+test("mixed toast items expire independently without explicit durations", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" })
+  await page.clock.install()
+  await openDocument(page, "/ui/toast/")
+  await page.getByRole("button", { name: "Success", exact: true }).click()
+  const rich = page.locator('.yu-toast[data-variant="rich"]')
+  await expect(rich).toBeVisible()
+  await page.clock.runFor(3000)
+  await expect(rich).toBeVisible()
+  await page
+    .locator(".demo-content")
+    .getByText("Simple", { exact: true })
+    .click()
+  await page.getByRole("button", { name: "Error", exact: true }).click()
+  const simple = page.locator('.yu-toast[data-variant="simple"]')
+  await expect(simple).toBeVisible()
+  await page.clock.runFor(2200)
+  await expect(rich).toHaveCount(0)
+  await expect(simple).toBeVisible()
+  await page.clock.runFor(3000)
+  await expect(simple).toHaveCount(0)
+  await page.getByRole("button", { name: "Success", exact: true }).click()
+  await expect(simple).toBeVisible()
+  await simple.hover()
+  await page.clock.runFor(6000)
+  await expect(simple).toBeVisible()
+  await page.getByRole("heading", { level: 1 }).hover()
+  await page.clock.runFor(5100)
+  await expect(simple).toHaveCount(0)
+})
+
+test("persistent and timed messages coexist, retain their settings and support manual dismissal", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" })
+  await page.clock.install()
+  await openDocument(page, "/ui/toast/")
+  const demo = page.locator(".demo-content")
+  await demo.getByText("Persistent", { exact: true }).click()
+  await page.getByRole("button", { name: "Error", exact: true }).click()
+  const persistent = page.locator('.yu-toast[data-tone="error"]')
+  await expect(persistent).toBeVisible()
+  await demo.getByText("10 seconds", { exact: true }).click()
+  await demo.getByText("Simple", { exact: true }).click()
+  await page.getByRole("button", { name: "Success", exact: true }).click()
+  const timed = page.locator('.yu-toast[data-tone="success"]')
+  await page.clock.runFor(6000)
+  await expect(persistent).toBeVisible()
+  await expect(timed).toBeVisible()
+  await demo.getByText("Default · 5s", { exact: true }).click()
+  await page.clock.runFor(4200)
+  await expect(timed).toHaveCount(0)
+  await page.clock.runFor(60000)
+  await expect(persistent).toBeVisible()
+  await persistent.getByRole("button", { name: "Undo", exact: true }).click()
+  await expect(persistent).toHaveCount(0)
+  await expect(page.locator("output")).toHaveText(
+    "Changes undone in this demo.",
+  )
+  await demo.getByText("Persistent", { exact: true }).click()
+  await page.getByRole("button", { name: "Info", exact: true }).click()
+  const last = page.locator('.yu-toast[data-tone="info"]')
+  await expect(last).toBeVisible()
+  await last.getByRole("button", { name: "Close", exact: true }).click()
+  await expect(last).toHaveCount(0)
+})
