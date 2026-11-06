@@ -1,0 +1,11 @@
+**/node_modules/
+**/.pnpm-store/
+**/dist/
+**/coverage/
+.git/
+.local/
+.husky/_/
+pnpm-lock.yaml
+**/test-results/
+**/playwright-report/
+**/.cache/

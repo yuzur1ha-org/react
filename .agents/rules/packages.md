@@ -1,0 +1,3 @@
+# Packages rules
+
+Token is framework-independent. UI depends on token. Markdown owns compilation/plugins/Vite transforms, not filesystem discovery or site policy. Press owns content, Node services, CLI, Vite project integration, SSG and unstyled React contracts; it cannot depend on UI/Emotion/default theme. Theme and reference depend on core public exports. Do not introduce cycles or private cross-package imports. Explicit exports, files allowlists, CSS sideEffects and peer metadata are public contracts. Relative TS source imports omit extensions; build output must be Node-resolvable. Never hand-edit dist or .cache.
