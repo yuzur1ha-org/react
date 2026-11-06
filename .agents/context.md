@@ -35,3 +35,5 @@ The user requested deleting the root tests/ directory. Repository policy tests, 
 ## Repository and release workflow update
 
 The user authorized local commits and migration of origin to https://github.com/yuzur1ha-org/react.git. Commit fc77ddf contains the workspace consolidation. No push or publication has been performed. Local version preparation was reverted; all seven packages remain at 0.1.0 with pending Changesets. Version and CHANGELOG changes belong to the GitHub release PR. Repository metadata and Pages base target the new repository; external App permissions, npm trust, CI and Pages hosting remain unverified.
+
+The user subsequently authorized gh-based publication, code/version PR merges and npm publishing through GitHub Actions using the NPM_TOKEN repository secret. PR #1 imports the implementation into the initially empty repository. The organization must allow Actions-created PRs; NPM_TOKEN must be provided through GitHub secrets, never chat or source files. Do not claim publication before the workflow and registry verify it.
