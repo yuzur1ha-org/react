@@ -24,11 +24,15 @@ test("Open header keeps inline tablet navigation and consistent locale Portal ty
     const locale = page.getByRole("combobox", { name: "Language", exact: true })
     await expect(locale).toContainText(width < 1024 ? "EN" : "English")
     await expect(locale).toHaveCSS("font-size", "14px")
-    await expect(locale).toHaveCSS("font-family", /JetBrains Mono/)
-    const family = await locale.evaluate(
-      (node) => getComputedStyle(node).fontFamily,
-    )
-    expect(family).toContain("JetBrains Mono")
+    let family = ""
+    await expect
+      .poll(async () => {
+        family = await locale.evaluate(
+          (node) => getComputedStyle(node).fontFamily,
+        )
+        return family
+      })
+      .toMatch(/JetBrains Mono/)
     await locale.click()
     await expect(page.getByRole("option").first()).toHaveCSS(
       "font-family",
