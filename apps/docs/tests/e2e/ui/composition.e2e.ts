@@ -28,37 +28,36 @@ test("SettingRow edits a sample profile without changing it on cancel", async ({
   await dialog.getByLabel("Display name").press("Enter")
   await expect(account.getByText("Sam Lee", { exact: true })).toBeVisible()
 })
-test("every playground has no horizontal document overflow", async ({
-  page,
-}, testInfo) => {
-  test.setTimeout(60_000)
-  for (const name of [
-    "button",
-    "text-field",
-    "number-field",
-    "textarea",
-    "select",
-    "switch",
-    "checkbox",
-    "radio",
-    "segmented",
-    "avatar",
-    "input-otp",
-    "tooltip",
-    "toast",
-    "modal",
-    "setting-row",
-    "popover",
-    "meter",
-    "form",
-    "accordion",
-    "badge",
-    "input",
-    "drawer",
-    "menu",
-    "disclosure",
-    "scroll-area",
-  ]) {
+for (const name of [
+  "button",
+  "text-field",
+  "number-field",
+  "textarea",
+  "select",
+  "switch",
+  "checkbox",
+  "radio",
+  "segmented",
+  "avatar",
+  "input-otp",
+  "tooltip",
+  "toast",
+  "modal",
+  "setting-row",
+  "popover",
+  "meter",
+  "form",
+  "accordion",
+  "badge",
+  "input",
+  "drawer",
+  "menu",
+  "disclosure",
+  "scroll-area",
+]) {
+  test(`${name} playground has no horizontal document overflow`, async ({
+    page,
+  }, testInfo) => {
     await open(page, name)
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
     await expect(
@@ -82,8 +81,9 @@ test("every playground has no horizontal document overflow", async ({
       ),
       name,
     ).toBe(true)
-  }
-})
+  })
+}
+
 test("derived tokens remain scoped and follow Select into its portal", async ({
   page,
 }) => {
