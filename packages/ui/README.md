@@ -6,7 +6,7 @@ Accessible React components with scoped themes and explicit component entry poin
 pnpm add @yuzur1ha/ui @yuzur1ha/token react react-dom @emotion/react
 ```
 
-ESM; Node 24 or 26. Version 0.1.0 is prepared locally and has not been published to npm.
+ESM; Node 24 or 26.
 
 ```tsx
 import { Button, UIProvider } from "@yuzur1ha/ui"

@@ -6,7 +6,7 @@ Compile individual Markdown files into React ESM at build time.
 pnpm add @yuzur1ha/markdown
 ```
 
-ESM; Node 24 or 26. Version 0.1.0 is prepared locally and has not been published to npm.
+ESM; Node 24 or 26.
 
 ```ts
 import { compileDocument } from "@yuzur1ha/markdown/compiler"

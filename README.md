@@ -8,7 +8,7 @@
 
 A frontend toolkit for consistent interfaces and documentation: design tokens, accessible React components, a standalone Markdown compiler and YuPress static sites.
 
-**Status:** six runtime ESM packages and one shared build-tooling package at 0.1.0, available in this workspace. npm publication and the GitHub Pages site are pending. Installation commands below apply after the first publication; use the workspace for evaluation today.
+**Status:** six runtime ESM packages and one shared build-tooling package, versioned independently through Changesets release PRs. GitHub Pages deployment is pending.
 
 ## Features
 
@@ -154,7 +154,7 @@ For package behavior changes, run `pnpm changeset`, select the affected packages
 
 ## Limitations and status
 
-This is an unreleased frontend toolkit. There are no backend services or hosted runtime requirements. The default compiler enables pipe tables rather than every GFM extension. Package publication, external CI, Windows checks and live Pages hosting must be verified separately from local checks; see the acceptance record for current evidence.
+This is a frontend toolkit. There are no backend services or hosted runtime requirements. The default compiler enables pipe tables rather than every GFM extension. Package publication, external CI, Windows checks and live Pages hosting must be verified separately from local checks; see the acceptance record for current evidence.
 
 ## License
 

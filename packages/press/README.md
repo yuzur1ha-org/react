@@ -6,7 +6,7 @@ Content project services, Vite integration and static documentation builds.
 pnpm add @yuzur1ha/press @yuzur1ha/press-theme react react-dom react-router vite @emotion/react
 ```
 
-ESM; Node 24 or 26. Version 0.1.0 is prepared locally and has not been published to npm.
+ESM; Node 24 or 26.
 
 ```ts
 import { defineConfig } from "@yuzur1ha/press"

@@ -6,7 +6,7 @@ Optional documentation demos, API tables and source previews.
 pnpm add @yuzur1ha/press-reference react react-dom @emotion/react
 ```
 
-ESM; Node 24 or 26. Version 0.1.0 is prepared locally and has not been published to npm.
+ESM; Node 24 or 26.
 
 ```tsx
 import { ReferenceDocument } from "@yuzur1ha/press-reference"

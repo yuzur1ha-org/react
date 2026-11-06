@@ -6,7 +6,7 @@ Framework-independent design tokens, light/dark themes and CSS adapters.
 pnpm add @yuzur1ha/token
 ```
 
-ESM; Node 24 or 26. Version 0.1.0 is prepared locally and has not been published to npm.
+ESM; Node 24 or 26.
 
 ```ts
 import { tokens, toCSSVariables } from "@yuzur1ha/token"

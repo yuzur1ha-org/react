@@ -6,7 +6,7 @@ The optional default React theme for YuPress documentation.
 pnpm add @yuzur1ha/press-theme react react-dom react-router @emotion/react
 ```
 
-ESM; Node 24 or 26. Version 0.1.0 is prepared locally and has not been published to npm.
+ESM; Node 24 or 26.
 
 ```tsx
 import type { ThemeModule } from "@yuzur1ha/press/react"
