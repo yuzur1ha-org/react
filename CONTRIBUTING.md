@@ -1,24 +1,32 @@
 # Contributing
 
-Use Node 24 or 26 and the pnpm version pinned in package.json.
+## Run the project locally
+
+Use Node.js 24 or 26 and pnpm 11.18.0. From the repository root, install the locked dependencies and start the Docs site.
 
 ```sh
 pnpm install --frozen-lockfile
-pnpm check
-pnpm test:unit
-pnpm exec playwright install chromium webkit
-pnpm test:e2e
-pnpm test:production
+pnpm dev
 ```
 
-Run `pnpm dev` for Docs. Use built public exports across packages, strict TypeScript and extensionless relative source imports. Do not commit build output, caches or reports.
+Open http://127.0.0.1:5173. Docs consumes the packages through their built exports. If you change a library while the server is running, stop it and rerun `pnpm dev` to rebuild the packages.
 
-Run `pnpm changeset` to generate a release record for public changes. Write its summary in English so generated changelogs remain English. Documentation/internal maintenance may use an empty changeset with a reason. Keep the CLI-generated `.changeset/README.md` unchanged. Version bumps and CHANGELOG generation are performed by the GitHub release PR workflow; do not run `pnpm version-packages` locally. Review and merge that PR after CI passes. With `APP_ID` and `APP_PRIVATE_KEY` configured, the App token triggers PR checks automatically. Otherwise the workflow uses `GITHUB_TOKEN`; a maintainer must run `gh workflow run ci.yml --ref changeset-release/main` and verify the resulting checks before merging. npm publication uses the `NPM_TOKEN` Actions secret and remains separately gated by `RELEASE_ENABLED` and the `release` environment. The repository is [yuzur1ha-org/react](https://github.com/yuzur1ha-org/react), with Pages built for `/react/`.
+## Make a change
 
-Follow Conventional Commits with English subjects; hooks run lint-staged and commitlint.
+Keep runtime code and tests in the package that owns the behavior. Import other packages through their public exports and omit JavaScript extensions on relative TypeScript source imports. Put user-facing examples and English guides in [the Docs content directory](apps/docs/src/content). Keep both root READMEs in sync when changing installation instructions or project descriptions.
 
-Only the root README is bilingual. Package and application READMEs are concise English; third-party notices and Changesets are English. English usage guides live in the Docs application, while its Chinese pages are translation-in-progress notices. Internal review documents under `.soppy/` remain Simplified Chinese. Agent instructions and code comments use English.
+Run `pnpm check` for lint, types and formatting, and `pnpm test:unit` for unit tests. For browser changes, install Chromium and WebKit with `pnpm exec playwright install chromium webkit`, then choose the checks that exercise your change.
 
-Maintainer notes live locally in `.soppy/`. They are optional and are not part of a clean checkout.
+| Command | Coverage |
+| --- | --- |
+| `pnpm test:e2e` | Development site interactions and content updates |
+| `pnpm test:production` | Static rendering and hydration in the production site |
+| `pnpm test:pages` | Navigation, assets and 404s at the root and under `/react/` |
 
-Code PRs run static checks, unit tests on Node 24/26 and targeted browser coverage for responsive headers, themes/portals, content recovery, SSG and deployment bases. CI runs lint/format once. Full browser coverage and Windows builds are available through the CI workflow dispatch with `full=true`; local full-suite commands remain available. Version-only PRs are identified from their actual Changeset/package diff and run package builds, types and packing. Main must be updated through checked PRs; CD relies on those checks instead of repeating the full quality workflow. Docs builds run only when Pages deployment is enabled.
+## Open a pull request
+
+Target `main` from a topic branch. Use an English Conventional Commit subject such as `fix(press): preserve locale on navigation`. Describe the user-visible change, how to reproduce it and which checks you ran.
+
+For a public package change, run `pnpm changeset`, select the affected packages and write an English summary for their changelogs. Documentation and internal changes may use `pnpm changeset --empty` with a reason. The release workflow prepares versions and changelogs in a separate PR.
+
+Code PRs run checks on Node 24 and 26 plus targeted browser tests. Maintainers can run the full browser and Windows suites with the `full` input on the CI workflow. The [CD workflow](.github/workflows/cd.yml) handles package releases and GitHub Pages deployment from `main`.
