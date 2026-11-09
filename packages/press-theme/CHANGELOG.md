@@ -1,5 +1,15 @@
 # @yuzur1ha/press-theme
 
+## 0.2.1
+
+### Patch Changes
+
+- [#3](https://github.com/yuzur1ha-org/react/pull/3) [`eed4cef`](https://github.com/yuzur1ha-org/react/commit/eed4cef106908a935e0236df94f8e3924e078dfd) Thanks [@soppylzz](https://github.com/soppylzz)! - Reuse the current route's navigation model for document pagination and sidebar navigation.
+- Updated dependencies [[`eed4cef`](https://github.com/yuzur1ha-org/react/commit/eed4cef106908a935e0236df94f8e3924e078dfd), [`eed4cef`](https://github.com/yuzur1ha-org/react/commit/eed4cef106908a935e0236df94f8e3924e078dfd), [`eed4cef`](https://github.com/yuzur1ha-org/react/commit/eed4cef106908a935e0236df94f8e3924e078dfd), [`eed4cef`](https://github.com/yuzur1ha-org/react/commit/eed4cef106908a935e0236df94f8e3924e078dfd)]:
+  - @yuzur1ha/token@0.2.1
+  - @yuzur1ha/press@0.2.1
+  - @yuzur1ha/ui@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes
