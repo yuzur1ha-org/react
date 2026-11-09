@@ -1,10 +1,10 @@
-import { useMessages } from "@yuzur1ha/press/react"
+import { useReferenceMessages } from "../messages"
 import { ScrollArea } from "@yuzur1ha/ui"
 import { styles } from "./api-table.styles"
 import type { ComponentApi } from "./api.types"
 
 export function ApiTable({ schema }: { schema: ComponentApi }) {
-  const text = useMessages()
+  const text = useReferenceMessages()
   return (
     <div className="component-api" css={styles}>
       {schema.parts.map((part) => (

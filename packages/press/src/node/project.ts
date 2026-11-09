@@ -1,7 +1,7 @@
 import { visit } from "@yuzur1ha/markdown/plugins"
 import { deploymentHref } from "../content/routes"
 import { createCodeService } from "./code"
-import { loadYuPressConfig } from "./config"
+import { loadYuPressConfig, type LoadedConfig } from "./config"
 import { createHash } from "node:crypto"
 import { globSync, readFileSync, readdirSync } from "node:fs"
 import {
@@ -28,8 +28,11 @@ export function inside(directory: string, path: string) {
   )
 }
 export async function discover(options: ProjectOptions) {
-  const { root, configFile, config, configInputs } =
-    await loadYuPressConfig(options)
+  return discoverSources(options, await loadYuPressConfig(options))
+}
+
+function discoverSources(options: ProjectOptions, configuration: LoadedConfig) {
+  const { root, configFile, config, configInputs } = configuration
   const srcDir = resolve(root, config.srcDir ?? "content")
   options.onDependency?.(srcDir, true)
   const outputDir = resolve(root, config.outputDir ?? ".cache/press")
@@ -53,7 +56,7 @@ export async function discover(options: ProjectOptions) {
     .sort()
   return {
     root,
-    configFile: configFile ?? resolve(root, "yupress.config.ts"),
+    configFile,
     config,
     outputDir,
     sources,
@@ -64,7 +67,14 @@ export async function discover(options: ProjectOptions) {
 export async function analyzeProject(
   options: ProjectOptions,
 ): Promise<ProjectSnapshot> {
-  const discovery = await discover(options)
+  return analyzeConfiguredProject(options, await loadYuPressConfig(options))
+}
+
+export async function analyzeConfiguredProject(
+  options: ProjectOptions,
+  configuration: LoadedConfig,
+): Promise<ProjectSnapshot> {
+  const discovery = discoverSources(options, configuration)
   const { root, configFile, config, outputDir, sources } = discovery
   const dependencies = new Set<string>([
     configFile,

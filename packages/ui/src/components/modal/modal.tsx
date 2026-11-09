@@ -1,6 +1,7 @@
+import { dialogOverlayStyles } from "../../internal/dialog-overlay.styles"
 import type { ModalProps } from "./modal.types"
 export type { ModalProps } from "./modal.types"
-import { modalStyles, modalOverlayStyles } from "./modal.styles"
+import { modalStyles } from "./modal.styles"
 import * as Dialog from "@radix-ui/react-dialog"
 import { useRef, useState } from "react"
 import { CloseButton } from "../close-button/index"
@@ -28,7 +29,10 @@ export function Modal({
     >
       <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay css={modalOverlayStyles} className="yu-modal-overlay" />
+        <Dialog.Overlay
+          css={dialogOverlayStyles}
+          className="yu-modal-overlay"
+        />
         <Dialog.Content
           css={modalStyles}
           ref={contentRef}

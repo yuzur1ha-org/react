@@ -37,7 +37,7 @@ test("rejects missing modules and private aliases", () => {
 
 test("builds custom output and only copies explicitly configured shims", async () => {
   const { buildDeclarations } = await import("@yuzur1ha/shared/declarations")
-  const { mkdtemp, mkdir, writeFile, readFile, rm } =
+  const { mkdtemp, mkdir, writeFile, readFile, readdir, rm } =
     await import("node:fs/promises")
   const { tmpdir } = await import("node:os")
   const root = await mkdtemp(resolve(tmpdir(), "shared-declarations-"))
@@ -66,6 +66,9 @@ test("builds custom output and only copies explicitly configured shims", async (
         include: ["src"],
       }),
     )
+    const scratch = resolve(root, "generated")
+    await mkdir(scratch)
+    await writeFile(resolve(scratch, "keep.txt"), "owned by caller")
     await buildDeclarations({
       root,
       config: "tsconfig.json",
@@ -73,10 +76,23 @@ test("builds custom output and only copies explicitly configured shims", async (
       temporaryDir: "generated",
       shims: [{ source: "shim.ts", target: "client.d.ts" }],
     })
+    assert.deepEqual(await readdir(scratch), ["keep.txt"])
     assert.match(
       await readFile(resolve(root, "output/foo.d.ts"), "utf8"),
       /interface Foo/,
     )
+    const before = (await readdir(root)).sort()
+    await assert.rejects(
+      buildDeclarations({
+        root,
+        config: "tsconfig.json",
+        temporaryDir: ".",
+        outDir: "output",
+        shims: [{ source: "missing.ts", target: "missing.d.ts" }],
+      }),
+      /missing.ts/,
+    )
+    assert.deepEqual((await readdir(root)).sort(), before)
     assert.match(
       await readFile(resolve(root, "output/client.d.ts"), "utf8"),
       /import\("\.\/foo\.js"\)/,

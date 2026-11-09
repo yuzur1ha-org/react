@@ -8,14 +8,14 @@ import {
 } from "node:fs"
 import { dirname, resolve } from "node:path"
 import { loadYuPressConfig } from "./config"
-import { generate } from "./generate"
+import { generateConfigured } from "./generate"
 import { inside } from "./project"
 import type { ProjectOptions, ProjectSnapshot } from "./types"
 export function watchProject(
   options: ProjectOptions,
   update: (snapshot?: ProjectSnapshot, error?: unknown) => void,
 ) {
-  const fingerprints = new Map<string, string>()
+  let fingerprints = new Map<string, string>()
   const fingerprint = (path: string) => {
     try {
       return createHash("sha256").update(readFileSync(path)).digest("hex")
@@ -34,8 +34,11 @@ export function watchProject(
   let outputDir = resolve(options.root, ".cache/press")
   let timer: ReturnType<typeof setTimeout> | undefined
   const watched = new Map<string, { watcher: FSWatcher; recursive: boolean }>()
+  const trackedFiles = new Set<string>()
   const track = (path: string, directory = false) => {
-    if (closed || inside(options.root, path)) return
+    if (closed) return
+    if (!directory) trackedFiles.add(path)
+    if (inside(options.root, path)) return
     let target = directory && existsSync(path) ? path : dirname(path)
     while (!existsSync(target) && dirname(target) !== target)
       target = dirname(target)
@@ -64,16 +67,16 @@ export function watchProject(
         break
       }
       dirty.clear()
+      trackedFiles.clear()
       try {
         const configuration = await loadYuPressConfig(trackedOptions)
         outputDir = resolve(
           configuration.root,
           configuration.config.outputDir ?? ".cache/press",
         )
-        const snapshot = await generate(trackedOptions)
+        const snapshot = await generateConfigured(trackedOptions, configuration)
         outputDir = snapshot.outputDir
-        for (const [path, value] of snapshot.inputs)
-          fingerprints.set(path, value)
+        fingerprints = new Map(snapshot.inputs)
         initialized = true
         const signature = createHash("sha256")
           .update(
@@ -106,6 +109,8 @@ export function watchProject(
     )
       return
     if (
+      !trackedFiles.has(path) &&
+      !fingerprints.has(path) &&
       !/\.(?:md|json|ts|mts|tsx|css|svg|png|webp|avif|gif|jpe?g)$/i.test(path)
     ) {
       try {
@@ -128,15 +133,17 @@ export function watchProject(
     }, 80)
   }
   function observe(directory: string, recursive: boolean) {
-    for (const [path, entry] of watched)
-      if (path === directory || (entry.recursive && inside(path, directory)))
-        return
+    for (const [path, entry] of watched) {
+      if (entry.recursive && inside(path, directory)) return
+      if (path === directory && !recursive) return
+    }
     const watcher = watch(directory, { recursive }, (_event, file) => {
       if (file) changed(resolve(directory, file))
     })
     watcher.on("error", (error) => {
       if (!closed) update(undefined, error)
     })
+    watched.get(directory)?.watcher.close()
     watched.set(directory, { watcher, recursive })
   }
   observe(resolve(options.root), true)

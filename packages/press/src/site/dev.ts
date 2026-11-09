@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url"
-import { writeFile } from "node:fs/promises"
+import { writeCompiledSnapshot } from "./compiled"
 import { dirname, join } from "node:path"
 import { createServer, searchForWorkspaceRoot, type Plugin } from "vite"
 import { watchProject } from "../node/watch"
@@ -38,8 +38,8 @@ export async function devSite(options: ProjectOptions & { port?: number }) {
         .then(async () => {
           if (current !== revision) return
           if (failedSnapshot)
-            await writeFile(
-              join(failedSnapshot.outputDir, "site/compiled.json"),
+            await writeCompiledSnapshot(
+              join(failedSnapshot.outputDir, "site"),
               literal({ error: message }),
             )
           server?.ws.send({

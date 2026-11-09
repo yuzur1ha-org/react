@@ -1,10 +1,10 @@
+import { dialogOverlayStyles } from "../../internal/dialog-overlay.styles"
 import type { DrawerProps } from "./drawer.types"
 export type { DrawerProps } from "./drawer.types"
 import * as Dialog from "@radix-ui/react-dialog"
 
 import { CloseButton } from "../close-button/index"
 import { drawerStyles } from "./drawer.styles"
-import { modalOverlayStyles } from "../modal/modal.styles"
 
 export function Drawer({
   trigger,
@@ -33,7 +33,7 @@ export function Drawer({
       <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay
-          css={modalOverlayStyles}
+          css={dialogOverlayStyles}
           className="yu-drawer-overlay"
         />
         <Dialog.Content

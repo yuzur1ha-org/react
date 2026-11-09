@@ -69,7 +69,9 @@ function configuration(value: unknown): value is YuPressConfig {
     return false
   return true
 }
-export async function loadYuPressConfig(options: ProjectOptions) {
+export type LoadedConfig = Awaited<ReturnType<typeof loadYuPressConfig>>
+
+function configPath(options: ProjectOptions) {
   const root = resolve(options.root)
   const defaults = ["yupress.config.ts", "yupress.config.mts"]
     .map((path) => resolve(root, path))
@@ -86,14 +88,38 @@ export async function loadYuPressConfig(options: ProjectOptions) {
     throw new Error(
       `Missing documentation config: ${resolve(root, options.configFile)}`,
     )
-  const configInputs = new Map<string, string>()
-  if (configFile) {
-    options.onDependency?.(configFile)
-    configInputs.set(
+  if (!configFile)
+    throw new Error(
+      `Missing YuPress configuration: ${resolve(root, "yupress.config.ts")}`,
+    )
+  return configFile
+}
+
+export function configInputsChanged(
+  options: ProjectOptions,
+  configuration: LoadedConfig,
+) {
+  if (configPath(options) !== configuration.configFile) return true
+  for (const [path, digest] of configuration.configInputs) {
+    if (
+      !existsSync(path) ||
+      createHash("sha256").update(readFileSync(path)).digest("hex") !== digest
+    )
+      return true
+  }
+  return false
+}
+
+export async function loadYuPressConfig(options: ProjectOptions) {
+  const root = resolve(options.root)
+  const configFile = configPath(options)
+  options.onDependency?.(configFile)
+  const configInputs = new Map<string, string>([
+    [
       configFile,
       createHash("sha256").update(readFileSync(configFile)).digest("hex"),
-    )
-  }
+    ],
+  ])
   const transforms = createJiti(import.meta.url, {
     moduleCache: false,
     fsCache: false,
@@ -115,10 +141,6 @@ export async function loadYuPressConfig(options: ProjectOptions) {
       return { code: transforms.transform(input) }
     },
   })
-  if (!configFile)
-    throw new Error(
-      `Missing YuPress configuration: ${resolve(root, "yupress.config.ts")}`,
-    )
   const exported: unknown = await loader.import(configFile, { default: true })
   const value: unknown = factory(exported)
     ? await exported({ root, command: options.command ?? "generate" })

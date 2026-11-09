@@ -6,6 +6,7 @@ import { deploymentHref } from "../content/index"
 import { type ProjectSnapshot } from "../node/types"
 import { assetName, publicSite } from "../node/site"
 
+import { writeCompiledSnapshot } from "./compiled"
 import { literal } from "./shared"
 export async function prepareSite(
   snapshot: ProjectSnapshot,
@@ -29,8 +30,8 @@ export async function prepareSite(
     if ((await readFile(target, "utf8").catch(() => null)) !== text)
       await writeFile(target, text)
   }
-  await save(
-    "compiled.json",
+  await writeCompiledSnapshot(
+    directory,
     literal(
       snapshot.documents.map((document) => ({
         source: resolve(snapshot.root, document.source),

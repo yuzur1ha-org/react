@@ -30,7 +30,10 @@ import {
   outlinePopoverStyles,
   type OutlineState,
 } from "../navigation/outline"
-import { readingNavigation } from "../navigation/navigation-model"
+import {
+  readingNavigation,
+  ReadingNavigationContext,
+} from "../navigation/navigation-model"
 import { SiteFooter } from "./footer"
 import { globalStyles, hashMotionStyles } from "./global.styles"
 import { layoutStyles } from "./layout.styles"
@@ -176,8 +179,10 @@ export function SiteRoot({
                                 {text.missing}
                               </p>
                             )}
-                            {error ?? <Outlet />}
-                            {children}
+                            <ReadingNavigationContext value={directory}>
+                              {error ?? <Outlet />}
+                              {children}
+                            </ReadingNavigationContext>
                           </div>
                         </div>
                         <SiteFooter isHome={!isDocs} />

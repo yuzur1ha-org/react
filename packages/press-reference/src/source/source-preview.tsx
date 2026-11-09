@@ -1,3 +1,4 @@
+import { useReferenceMessages } from "../messages"
 import { CodeBlock } from "@yuzur1ha/press/react"
 import type { HighlightedCode } from "@yuzur1ha/press/content"
 import {
@@ -16,6 +17,7 @@ export function SourcePreview({
   name: string
   code?: HighlightedCode
 }) {
+  const text = useReferenceMessages()
   const data =
     code?.source === source
       ? code
@@ -29,7 +31,7 @@ export function SourcePreview({
   return (
     <Disclosure className="usage" css={styles} defaultOpen>
       <div className="usage-toolbar">
-        <DisclosureTrigger>React / TypeScript</DisclosureTrigger>
+        <DisclosureTrigger>{text.sourceLanguage}</DisclosureTrigger>
       </div>
       <DisclosureContent>
         <div className="source-panel">

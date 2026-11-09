@@ -3,7 +3,7 @@ import console from "node:console"
 import { URL } from "node:url"
 import assert from "node:assert/strict"
 import { resolve, join } from "node:path"
-import { mkdir, mkdtemp, rm } from "node:fs/promises"
+import { mkdir, mkdtemp, readFile, rm } from "node:fs/promises"
 import { test } from "@playwright/test"
 import { previewSite } from "@yuzur1ha/press/site"
 import { execFile } from "node:child_process"
@@ -33,6 +33,10 @@ test("serves root and subpath builds with hydration, licenses and deep links", a
       await run(process.execPath, ["scripts/copy-licenses.mjs", output], {
         cwd: root,
       })
+      assert.deepEqual(
+        await readFile(join(output, "404.html")),
+        await readFile(join(output, "404/index.html")),
+      )
       const server = await previewSite({ root, port: 0, outDir: output })
       const address = server.address()
       if (!address || typeof address === "string")
