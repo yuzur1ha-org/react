@@ -15,12 +15,19 @@ export function createSiteVite(
   const markdown = createMarkdownPlugin({
     resolveCompiled: compiledDocumentResolver(directory),
   })
+  // Press reloads after publishing a complete snapshot and route manifest.
+  const router = reactRouter().filter(
+    (plugin) =>
+      command === "build" ||
+      (plugin.name !== "react-router:hmr-updates" &&
+        plugin.name !== "react-router-server-change-trigger-client-hmr"),
+  )
   return {
     root: directory,
     base,
     plugins: [
       markdown,
-      reactRouter(),
+      router,
       {
         name: "yupress:client-boundary",
         async generateBundle(_options, bundle) {

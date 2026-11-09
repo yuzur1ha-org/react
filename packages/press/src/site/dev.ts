@@ -83,7 +83,7 @@ export async function devSite(options: ProjectOptions & { port?: number }) {
           join(next.outputDir, "dev-build"),
           true,
         )
-        if (snapshot !== next) return
+        if (current !== revision) return
         failure = undefined
         for (const environment of Object.values(activeServer.environments)) {
           const graph = environment.moduleGraph
@@ -96,7 +96,7 @@ export async function devSite(options: ProjectOptions & { port?: number }) {
               graph.invalidateModule(module)
         }
         await waitForRouteManifest(activeServer, directory)
-        if (snapshot !== next) return
+        if (current !== revision) return
         activeServer.ws.send({ type: "full-reload" })
       })
       .catch((error) => {
@@ -128,7 +128,7 @@ export async function devSite(options: ProjectOptions & { port?: number }) {
       name: "yupress:site-lifecycle",
       enforce: "pre",
       hotUpdate: {
-        order: "post",
+        order: "pre",
         handler() {
           return []
         },
