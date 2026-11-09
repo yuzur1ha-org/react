@@ -1,3 +1,4 @@
+import { createContext } from "react"
 import {
   sectionDocuments,
   type PublicSite,
@@ -24,3 +25,7 @@ export function readingNavigation(
     ...(section ? { section } : {}),
   }
 }
+
+export const ReadingNavigationContext = createContext<
+  ReturnType<typeof readingNavigation> | undefined
+>(undefined)

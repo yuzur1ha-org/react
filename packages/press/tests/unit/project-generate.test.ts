@@ -56,6 +56,7 @@ it("cleans only owned files after deleting sources, and rejects invalid input wi
   await generate({ root })
   const directory = join(root, ".cache/press")
   await writeFile(join(directory, "user.txt"), "preserve")
+  await writeFile(join(directory, "manifest.ts.tmp"), "preserve temporary file")
   const source = join(root, "content/hello.md")
   const before = await readFile(join(directory, "manifest.ts"), "utf8")
   await writeFile(source, "---\nid: greeting\ntitle: false\n---\n# Fallback")
@@ -67,6 +68,9 @@ it("cleans only owned files after deleting sources, and rejects invalid input wi
     "never",
   )
   expect(await readFile(join(directory, "user.txt"), "utf8")).toBe("preserve")
+  expect(await readFile(join(directory, "manifest.ts.tmp"), "utf8")).toBe(
+    "preserve temporary file",
+  )
 })
 it("supports explicit config/output paths, rejects missing/ambiguous config and leaves check read-only", async () => {
   const root = await fixture()
@@ -102,4 +106,54 @@ it("refuses to overwrite a user file at a generated output path", async () => {
   expect(await readFile(join(directory, "manifest.ts"), "utf8")).toBe(
     "user content",
   )
+})
+
+it("evaluates the configuration factory once on an uncontended generation", async () => {
+  const root = await fixture()
+  const config = join(root, "yupress.config.ts")
+  await rename(config, join(root, "original.ts"))
+  await writeFile(
+    config,
+    `import {appendFileSync} from "node:fs"
+import original from "./original"
+export default () => {
+  appendFileSync(${JSON.stringify(join(root, "calls"))}, "x")
+  return original
+}`,
+  )
+  await generate({ root })
+  expect(await readFile(join(root, "calls"), "utf8")).toBe("x")
+})
+
+it("rejects an output directory change while waiting for the generation lock", async () => {
+  const root = await fixture()
+  const directory = join(root, ".cache/press")
+  const lock = join(directory, ".generation.lock")
+  await mkdir(directory, { recursive: true })
+  await writeFile(lock, "")
+  const config = join(root, "yupress.config.ts")
+  await rename(config, join(root, "original.ts"))
+  await writeFile(
+    config,
+    `import {writeFileSync} from "node:fs"
+import original from "./original"
+export default () => { writeFileSync(${JSON.stringify(join(root, "started"))}, "ready"); return original }`,
+  )
+  const result = expect(generate({ root })).rejects.toThrow(
+    "Configuration output changed",
+  )
+  try {
+    await expect
+      .poll(() => readFile(join(root, "started"), "utf8").catch(() => ""))
+      .toBe("ready")
+    await writeFile(
+      config,
+      'import original from "./original"; export default {...original, outputDir:"other"}',
+    )
+  } finally {
+    await rm(lock)
+  }
+  await result
+  expect(await readdir(directory)).toEqual([])
+  expect(await readdir(root)).not.toContain("other")
 })

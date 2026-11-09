@@ -5,13 +5,13 @@ description: Create, develop and build your first YuPress site.
 
 # Getting started
 
-Use Node 24 or 26. After npm publication, install the core, a theme and their host dependencies:
+Use Node 24 or 26. Install the core, a theme and their host dependencies:
 
 ```sh
 pnpm add @yuzur1ha/press @yuzur1ha/press-theme react react-dom react-router vite @emotion/react
 ```
 
-Before publication, use the built workspace packages. Create `yupress.config.ts` at the project root:
+Create `yupress.config.ts` at the project root:
 
 ```ts
 import { defineConfig } from "@yuzur1ha/press"

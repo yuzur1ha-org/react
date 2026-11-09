@@ -6,10 +6,11 @@ import {
   readFile,
   rename,
   rm,
-  stat,
+  lstat,
+  realpath,
   writeFile,
 } from "node:fs/promises"
-import { dirname, join, resolve } from "node:path"
+import { basename, dirname, join, resolve } from "node:path"
 import process from "node:process"
 import { fileURLToPath } from "node:url"
 import { generate } from "../node/generate"
@@ -17,23 +18,33 @@ import type { ProjectOptions } from "../node/types"
 import { assetName } from "../node/site"
 
 import { prepareSite } from "./generate"
-import { outputMarker, safeInside } from "./shared"
+import { outputMarker, readOutputBase, safeInside } from "./shared"
 export async function buildSite(options: ProjectOptions & { outDir?: string }) {
   const snapshot = await generate({ ...options, command: "build" })
   const directory = join(snapshot.outputDir, "site")
   const staging = join(snapshot.outputDir, "build-" + randomUUID())
   const published = join(snapshot.outputDir, "publish-" + randomUUID())
-  const output = resolve(options.root, options.outDir ?? "dist")
+  const requested = resolve(options.root, options.outDir ?? "dist")
+  const output = join(await realpath(dirname(requested)), basename(requested))
+  const siteDirectory = join(await realpath(snapshot.outputDir), "site")
   if (
-    !safeInside(resolve(options.root), output) ||
-    safeInside(output, directory) ||
-    safeInside(directory, output)
+    !safeInside(await realpath(options.root), output) ||
+    output === siteDirectory ||
+    safeInside(output, siteDirectory) ||
+    safeInside(siteDirectory, output)
   )
     throw new Error(`Unsafe site output: ${output}`)
-  const existing = await stat(output).catch(() => null)
+  const existing = await lstat(output).catch((error: unknown) => {
+    if (error instanceof Error && "code" in error && error.code === "ENOENT")
+      return undefined
+    throw error
+  })
   if (
     existing &&
-    !(await readFile(join(output, outputMarker), "utf8").catch(() => ""))
+    (!existing.isDirectory() ||
+      !(await readOutputBase(join(output, outputMarker)).catch(
+        () => undefined,
+      )))
   )
     throw new Error(`Refusing to replace unowned site output: ${output}`)
   const site = await prepareSite(snapshot, directory, staging)
@@ -75,6 +86,9 @@ export async function buildSite(options: ProjectOptions & { outDir?: string }) {
       await cp(join(client, "assets"), join(published, "assets"), {
         recursive: true,
       })
+    await cp(join(published, "404/index.html"), join(published, "404.html"), {
+      force: false,
+    })
     await rm(join(published, "__spa-fallback.html"), { force: true })
     for (const document of [...site.documents, ...site.homes]) {
       const path = resolve(published, "." + document.route, "index.html")
@@ -114,7 +128,7 @@ export async function buildSite(options: ProjectOptions & { outDir?: string }) {
       throw error
     }
     if (existing) await rm(backup, { recursive: true })
-    const result = { output, documents: site.documents.length }
+    const result = { output: requested, documents: site.documents.length }
     for (const plugin of snapshot.config.plugins ?? [])
       await plugin.buildEnd?.(result)
     return result

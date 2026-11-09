@@ -5,7 +5,7 @@ description: Compile one document and render the generated React module.
 
 # Getting started
 
-Use Node 24 or 26. After npm publication, install the compiler with `pnpm add @yuzur1ha/markdown`. Compiler-only projects do not need React, Vite, Press or UI. To render the generated modules, provide React and React DOM; Vite integration also needs a compatible Vite installation. In this repository, use the workspace packages until publication.
+Use Node 24 or 26. Install the compiler with `pnpm add @yuzur1ha/markdown`. Compiler-only projects do not need React, Vite, Press or UI. To render the generated modules, provide React and React DOM; Vite integration also needs a compatible Vite installation.
 
 ## Compile a document
 

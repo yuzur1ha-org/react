@@ -1,9 +1,5 @@
 import type { Plugin } from "vite"
-import {
-  compileDocument,
-  type CompilerOptions,
-  type CompiledDocument,
-} from "../compiler/index"
+import type { CompilerOptions, CompiledDocument } from "../compiler/types"
 
 export type MarkdownPluginOptions = {
   compiler?: CompilerOptions<unknown>
@@ -23,13 +19,17 @@ export function createMarkdownPlugin(
     enforce: "pre",
     async transform(source, id) {
       if (!id.endsWith(".md")) return
-      const result = options.resolveCompiled
-        ? await options.resolveCompiled(id)
-        : await compileDocument(
-            source,
-            id,
-            options.compiler ?? { analyze: () => ({}) },
-          )
+      let result: CompiledDocument<unknown> | undefined
+      if (options.resolveCompiled) {
+        result = await options.resolveCompiled(id)
+      } else {
+        const { compileDocument } = await import("../compiler/index")
+        result = await compileDocument(
+          source,
+          id,
+          options.compiler ?? { analyze: () => ({}) },
+        )
+      }
       if (!result) return
       for (const path of result.dependencies) this.addWatchFile(path)
       return {

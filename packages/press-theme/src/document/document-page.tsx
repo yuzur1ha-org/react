@@ -3,7 +3,10 @@ import { useDocumentHash } from "../navigation/use-document-hash"
 import { type SiteDocument } from "@yuzur1ha/press/content"
 
 import { useMessages, useSite } from "../context"
-import { readingNavigation } from "../navigation/navigation-model"
+import {
+  readingNavigation,
+  ReadingNavigationContext,
+} from "../navigation/navigation-model"
 import {
   OutlineContext,
   OutlinePanel,
@@ -38,7 +41,11 @@ export function DocumentPage({
     setToc(headings)
     publishOutline?.({ documentKey: document.key, headings })
   }, [document.key, publishOutline])
-  const directory = readingNavigation(site, document, document.locale)
+  const layoutNavigation = useContext(ReadingNavigationContext)
+  const directory =
+    layoutNavigation?.document?.key === document.key
+      ? layoutNavigation
+      : readingNavigation(site, document, document.locale)
   const siblings = directory.sidebar
   const index = siblings.findIndex((item) => item.key === document.key)
   const previous = siblings[index - 1]

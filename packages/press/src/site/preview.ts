@@ -1,27 +1,21 @@
-import { readFile, stat } from "node:fs/promises"
+import { readFile, realpath, stat } from "node:fs/promises"
 import { createServer as createHttpServer } from "node:http"
 import { extname, join, resolve } from "node:path"
-import { normalizeBase } from "../content/index"
 import { type ProjectOptions } from "../node/types"
 
-import { outputMarker, safeInside } from "./shared"
+import { outputMarker, readOutputBase, safeInside } from "./shared"
 export async function previewSite(
   options: ProjectOptions & { port?: number; outDir?: string },
 ) {
-  const output = resolve(options.root, options.outDir ?? "dist")
-  const marker: unknown = JSON.parse(
-    await readFile(join(output, outputMarker), "utf8"),
+  const output = await realpath(resolve(options.root, options.outDir ?? "dist"))
+  const outputFile = async (path: string) => {
+    const target = await realpath(path)
+    if (!safeInside(output, target)) throw new Error("Outside output")
+    return target
+  }
+  const base = await readOutputBase(
+    await outputFile(join(output, outputMarker)),
   )
-  if (
-    !marker ||
-    typeof marker !== "object" ||
-    !("version" in marker) ||
-    marker.version !== 1 ||
-    !("base" in marker) ||
-    typeof marker.base !== "string"
-  )
-    throw new Error("Invalid Press static output marker; rebuild the site")
-  const base = normalizeBase(marker.base)
   const types: Record<string, string> = {
     ".html": "text/html; charset=utf-8",
     ".js": "text/javascript",
@@ -30,7 +24,9 @@ export async function previewSite(
     ".png": "image/png",
     ".data": "text/x-script",
   }
-  const missing = await readFile(join(output, "404/index.html"))
+  const missing = await readFile(
+    await outputFile(join(output, "404/index.html")),
+  )
   const server = createHttpServer((request, response) => {
     void (async () => {
       try {
@@ -44,11 +40,12 @@ export async function previewSite(
         if (path !== output && !safeInside(output, path))
           throw new Error("Outside output")
         if ((await stat(path)).isDirectory()) path = join(path, "index.html")
+        const target = await outputFile(path)
         response.setHeader(
           "Content-Type",
           types[extname(path)] ?? "application/octet-stream",
         )
-        response.end(await readFile(path))
+        response.end(await readFile(target))
       } catch {
         response.writeHead(404, { "Content-Type": "text/html; charset=utf-8" })
         response.end(missing)

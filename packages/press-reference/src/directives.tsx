@@ -1,6 +1,6 @@
 import type { HighlightedCode } from "@yuzur1ha/press/content"
 import { demoStyles } from "./directives.styles"
-import { useMessages } from "@yuzur1ha/press/react"
+import { useReferenceMessages } from "./messages"
 import type { ComponentType } from "react"
 import { ApiTable } from "./api/api-table"
 import type { ComponentApi } from "./api/api.types"
@@ -18,7 +18,7 @@ export function Demo({
   file: string
   id: string
 }) {
-  const text = useMessages()
+  const text = useReferenceMessages()
   return (
     <div className="component-demo" css={demoStyles}>
       <div className="preview-heading">

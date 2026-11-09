@@ -1,5 +1,7 @@
 import {
   mkdir,
+  mkdtemp,
+  rm,
   open,
   readFile,
   rename,
@@ -25,11 +27,12 @@ async function read(path: string) {
 }
 export async function withGenerationLock<T>(
   outputDir: string,
-  work: () => Promise<T>,
+  work: (waited: boolean) => Promise<T>,
 ) {
   await mkdir(outputDir, { recursive: true })
   const lock = join(outputDir, ".generation.lock")
   let handle
+  let waited = false
   for (let attempt = 0; attempt < 200; attempt++) {
     try {
       handle = await open(lock, "wx")
@@ -42,12 +45,13 @@ export async function withGenerationLock<T>(
         error.code !== "EEXIST"
       )
         throw error
+      waited = true
       await setTimeout(25)
     }
   }
   if (!handle) throw new Error(`Documentation generation is locked: ${lock}`)
   try {
-    return await work()
+    return await work(waited)
   } finally {
     await handle.close()
     await unlink(lock)
@@ -95,16 +99,16 @@ export async function writeGenerated(
     throw new Error(
       `Stale generated documentation: ${[...changed, ...removed].join(", ")}`,
     )
-  if (check) return { changed: [], removed: [] }
+  if (check || (!changed.length && !removed.length))
+    return { changed: [], removed: [] }
   await mkdir(outputDir, { recursive: true })
-  const staged: string[] = []
+  const staging = await mkdtemp(join(outputDir, ".generate-"))
   try {
     for (const name of changed) {
-      await writeFile(join(outputDir, `${name}.tmp`), expected[name] ?? "")
-      staged.push(name)
+      await writeFile(join(staging, name), expected[name] ?? "")
     }
-    for (const name of staged)
-      await rename(join(outputDir, `${name}.tmp`), join(outputDir, name))
+    for (const name of changed)
+      await rename(join(staging, name), join(outputDir, name))
     for (const name of removed)
       await unlink(join(outputDir, name)).catch((error: unknown) => {
         if (
@@ -116,8 +120,7 @@ export async function writeGenerated(
           throw error
       })
   } finally {
-    for (const name of staged)
-      await unlink(join(outputDir, `${name}.tmp`)).catch(() => undefined)
+    await rm(staging, { recursive: true, force: true })
   }
   return { changed, removed }
 }

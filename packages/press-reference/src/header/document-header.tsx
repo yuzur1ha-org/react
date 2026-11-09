@@ -1,4 +1,4 @@
-import { useMessages } from "@yuzur1ha/press/react"
+import { useReferenceMessages } from "../messages"
 import type { ReferenceMetadata } from "../types"
 import { styles } from "./document-header.styles"
 import {
@@ -8,7 +8,7 @@ import {
 } from "./metadata"
 
 export function DocumentHeader({ metadata }: { metadata: ReferenceMetadata }) {
-  const text = useMessages()
+  const text = useReferenceMessages()
   const dates = documentDates(metadata)
   return (
     <header className="document-header" css={styles}>

@@ -6,3 +6,4 @@ export {
   formatDocumentDate,
   formatDocumentVersion,
 } from "./header/metadata"
+export { ReferenceMessagesContext, type ReferenceMessages } from "./messages"

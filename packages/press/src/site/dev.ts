@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url"
-import { writeFile } from "node:fs/promises"
+import { writeCompiledSnapshot } from "./compiled"
 import { dirname, join } from "node:path"
 import { createServer, searchForWorkspaceRoot, type Plugin } from "vite"
 import { watchProject } from "../node/watch"
@@ -38,8 +38,8 @@ export async function devSite(options: ProjectOptions & { port?: number }) {
         .then(async () => {
           if (current !== revision) return
           if (failedSnapshot)
-            await writeFile(
-              join(failedSnapshot.outputDir, "site/compiled.json"),
+            await writeCompiledSnapshot(
+              join(failedSnapshot.outputDir, "site"),
               literal({ error: message }),
             )
           server?.ws.send({
@@ -83,7 +83,7 @@ export async function devSite(options: ProjectOptions & { port?: number }) {
           join(next.outputDir, "dev-build"),
           true,
         )
-        if (snapshot !== next) return
+        if (current !== revision) return
         failure = undefined
         for (const environment of Object.values(activeServer.environments)) {
           const graph = environment.moduleGraph
@@ -96,7 +96,7 @@ export async function devSite(options: ProjectOptions & { port?: number }) {
               graph.invalidateModule(module)
         }
         await waitForRouteManifest(activeServer, directory)
-        if (snapshot !== next) return
+        if (current !== revision) return
         activeServer.ws.send({ type: "full-reload" })
       })
       .catch((error) => {
@@ -128,7 +128,7 @@ export async function devSite(options: ProjectOptions & { port?: number }) {
       name: "yupress:site-lifecycle",
       enforce: "pre",
       hotUpdate: {
-        order: "post",
+        order: "pre",
         handler() {
           return []
         },

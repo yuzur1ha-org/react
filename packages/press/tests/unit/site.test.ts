@@ -5,6 +5,7 @@ import {
   readdir,
   rename,
   rm,
+  symlink,
   writeFile,
 } from "node:fs/promises"
 import { join, resolve } from "node:path"
@@ -82,6 +83,11 @@ export default defineConfig({theme:"@yuzur1ha/press-theme",site:{title:'Press fi
     expect(home).toContain('href="/manual/guide/"')
     await rename(join(root, "content"), join(root, "content-backup"))
     await rename(join(root, "yupress.config.ts"), join(root, "press-backup.ts"))
+    await symlink(
+      join(root, "content-backup"),
+      join(result.output, "linked-content"),
+      "junction",
+    )
     const server = await previewSite({ root, port: 0 })
     try {
       const address = server.address()
@@ -90,6 +96,12 @@ export default defineConfig({theme:"@yuzur1ha/press-theme",site:{title:'Press fi
       const origin = `http://127.0.0.1:${address.port}`
       expect((await fetch(origin + "/manual/zh-cn/guide/")).status).toBe(200)
       expect((await fetch(origin + "/manual/missing/")).status).toBe(404)
+      expect(
+        (await fetch(origin + "/manual/linked-content/en/guide.md")).status,
+      ).toBe(404)
+      expect(await readFile(join(result.output, "404.html"))).toEqual(
+        await readFile(join(result.output, "404/index.html")),
+      )
     } finally {
       await new Promise<void>((resolve) => server.close(() => resolve()))
     }
@@ -109,3 +121,31 @@ export default defineConfig({theme:"@yuzur1ha/press-theme",site:{title:'Press fi
     await rm(root, { recursive: true, force: true })
   }
 }, 30000)
+
+it("refuses publication through an external directory link or an invalid ownership marker", async () => {
+  const root = await mkdtemp(resolve(import.meta.dirname, "../../.site-"))
+  const external = await mkdtemp(resolve(import.meta.dirname, "../../.site-"))
+  try {
+    await mkdir(join(root, "content"))
+    await writeFile(join(root, "content/index.md"), "# Home")
+    await writeFile(
+      join(root, "yupress.config.ts"),
+      "export default {theme:'@yuzur1ha/press-theme',site:{title:'Guard',locales:[{id:'en',lang:'en',label:'English',sourceDir:'',prefix:''}]}}",
+    )
+    await symlink(external, join(root, "linked"), "junction")
+    await expect(buildSite({ root, outDir: "linked/site" })).rejects.toThrow(
+      "Unsafe site output",
+    )
+    expect(await readdir(external)).toEqual([])
+    await mkdir(join(root, "dist"))
+    await writeFile(join(root, "dist/.yupress-output"), "unrelated")
+    await writeFile(join(root, "dist/keep.txt"), "user data")
+    await expect(buildSite({ root })).rejects.toThrow("unowned site output")
+    expect(await readFile(join(root, "dist/keep.txt"), "utf8")).toBe(
+      "user data",
+    )
+  } finally {
+    await rm(root, { recursive: true, force: true })
+    await rm(external, { recursive: true, force: true })
+  }
+})

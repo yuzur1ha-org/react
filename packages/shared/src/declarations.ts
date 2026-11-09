@@ -1,5 +1,12 @@
 import ts from "typescript"
-import { readdir, readFile, writeFile, mkdir, rm } from "node:fs/promises"
+import {
+  readdir,
+  readFile,
+  writeFile,
+  mkdir,
+  mkdtemp,
+  rm,
+} from "node:fs/promises"
 import { dirname, resolve, relative, join } from "node:path"
 import { execFileSync } from "node:child_process"
 import { fileURLToPath } from "node:url"
@@ -86,6 +93,7 @@ export interface DeclarationBuildOptions {
   root?: string
   config?: string
   outDir?: string
+  /** Parent directory for per-build scratch files. */
   temporaryDir?: string
   shims?: readonly { source: string; target: string }[]
 }
@@ -98,43 +106,48 @@ export async function buildDeclarations({
   shims = [],
 }: DeclarationBuildOptions = {}): Promise<void> {
   root = resolve(root)
-  const temporary = resolve(root, temporaryDir)
-  await rm(temporary, { recursive: true, force: true })
-  const compiler = fileURLToPath(import.meta.resolve("typescript/bin/tsc"))
-  execFileSync(
-    process.execPath,
-    [
-      compiler,
-      "-p",
-      config,
-      "--emitDeclarationOnly",
-      "--declarationMap",
-      "false",
-      "--outDir",
-      temporary,
-    ],
-    { cwd: root, stdio: "inherit" },
-  )
-  const files = new Set(await walk(temporary))
-  for (const file of files) {
-    if (!file.endsWith(".d.ts")) continue
-    const destination = resolve(root, outDir, relative(temporary, file))
-    await mkdir(dirname(destination), { recursive: true })
-    await writeFile(
-      destination,
-      rewriteDeclaration(await readFile(file, "utf8"), file, files),
+  const parent = resolve(root, temporaryDir)
+  await mkdir(parent, { recursive: true })
+  const temporary = await mkdtemp(join(parent, "build-"))
+  try {
+    const compiler = fileURLToPath(import.meta.resolve("typescript/bin/tsc"))
+    execFileSync(
+      process.execPath,
+      [
+        compiler,
+        "-p",
+        config,
+        "--emitDeclarationOnly",
+        "--declarationMap",
+        "false",
+        "--outDir",
+        temporary,
+      ],
+      { cwd: root, stdio: "inherit" },
     )
-  }
-  for (const shim of shims) {
-    const destination = resolve(root, outDir, shim.target)
-    await mkdir(dirname(destination), { recursive: true })
-    await writeFile(
-      destination,
-      rewriteDeclaration(
-        await readFile(resolve(root, shim.source), "utf8"),
-        resolve(temporary, shim.target),
-        files,
-      ),
-    )
+    const files = new Set(await walk(temporary))
+    for (const file of files) {
+      if (!file.endsWith(".d.ts")) continue
+      const destination = resolve(root, outDir, relative(temporary, file))
+      await mkdir(dirname(destination), { recursive: true })
+      await writeFile(
+        destination,
+        rewriteDeclaration(await readFile(file, "utf8"), file, files),
+      )
+    }
+    for (const shim of shims) {
+      const destination = resolve(root, outDir, shim.target)
+      await mkdir(dirname(destination), { recursive: true })
+      await writeFile(
+        destination,
+        rewriteDeclaration(
+          await readFile(resolve(root, shim.source), "utf8"),
+          resolve(temporary, shim.target),
+          files,
+        ),
+      )
+    }
+  } finally {
+    await rm(temporary, { recursive: true, force: true })
   }
 }

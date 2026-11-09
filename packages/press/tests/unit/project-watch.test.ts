@@ -89,6 +89,19 @@ it.each(["file", "directory"])(
           ).includes('"added"'),
         )
         .toBe(false)
+      if (removed === "file") {
+        await writeFile(
+          join(root, "content/new/added.md"),
+          "---\nid: added\n---\n# Added",
+        )
+        await expect
+          .poll(async () =>
+            (
+              await readFile(join(root, ".cache/press/documents.d.ts"), "utf8")
+            ).includes('"added"'),
+          )
+          .toBe(true)
+      }
     } finally {
       await close()
     }
@@ -103,6 +116,7 @@ it("rebuilds imported TS configuration and watches sources outside the project r
   directories.push(external)
   const config = join(root, "yupress.config.ts")
   const original = await readFile(config, "utf8")
+  await mkdir(join(external, "nested"))
   await writeFile(join(external, "settings.ts"), 'export const title = "First"')
   await writeFile(
     config,
@@ -139,7 +153,10 @@ it("rebuilds imported TS configuration and watches sources outside the project r
         { timeout: 5000 },
       )
       .toBe(true)
-    await writeFile(join(external, "added.md"), "---\nid: added\n---\n# Added")
+    await writeFile(
+      join(external, "nested/added.md"),
+      "---\nid: added\n---\n# Added",
+    )
     await expect
       .poll(
         async () =>
@@ -221,6 +238,34 @@ it("rebuilds default code enhancement when configuration changes", async () => {
     expect(outputs[2]).toContain('"copy": false')
     expect(outputs[2]).not.toContain("--yu-code-token")
     expect(errors).toEqual([])
+  } finally {
+    await close()
+  }
+})
+
+it("updates a plugin input with a custom extension", async () => {
+  const root = await fixture()
+  const config = join(root, "yupress.config.ts")
+  await writeFile(
+    config,
+    (await readFile(config, "utf8")).replace(
+      "setup(_context) {",
+      'setup(context) { context.read("caption.txt");',
+    ),
+  )
+  const input = join(root, "caption.txt")
+  let updates = 0
+  let failures = 0
+  const close = watchProject({ root }, (snapshot, error) => {
+    if (snapshot) updates++
+    if (error) failures++
+  })
+  try {
+    await expect.poll(() => failures).toBeGreaterThan(0)
+    await writeFile(input, "first")
+    await expect.poll(() => updates).toBe(1)
+    await writeFile(input, "second")
+    await expect.poll(() => updates).toBe(2)
   } finally {
     await close()
   }
